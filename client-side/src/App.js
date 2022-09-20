@@ -1,16 +1,9 @@
 import "./App.css";
-import Navbar from "./Navbar";
-import Content from "./Content";
-import ContentDetail from "./ContentDetail";
+import router from "./router";
+import { RouterProvider } from "react-router-dom";
 
 function App() {
-  return (
-    <div>
-      <Navbar />
-      <Content />
-      <ContentDetail />
-    </div>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

@@ -70,7 +70,32 @@
       "price": "3850",
       "mainImg": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-lock-it-tote-lv-aerogram-bags--M59158_PM1_Worn%20view.png?wid=2048&hei=2048",
       "categoryId": "8",
-      "authorId": "1"
+      "authorId": "1",
+      "User": {
+        "id": "2",
+        "username": "customer",
+        "email": "customer@mail.com",
+        "password": "customer",
+        "role": "customer",
+        "phoneNumber": "0822222",
+        "address": "Cipete"
+      },
+      "Category": {
+        "id": "9",
+        "name": "Accessories"
+      },
+      "Images": [
+        {
+          "id": "1",
+          "productId": "1",
+          "imgUrl": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-lock-it-tote-lv-aerogram-bags--M59158_PM2_Front%20view.png?wid=1240&hei=1240"
+        },
+        {
+          "id": "2",
+          "productId": "1",
+          "imgUrl": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-lock-it-tote-lv-aerogram-bags--M59158_PM1_Side%20view.png?wid=1240&hei=1240"
+        }
+      ]
     },
     {
       "id": "2",
@@ -80,7 +105,32 @@
       "price": "2590",
       "mainImg": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-city-keepall-lv-aerogram-bags--M59328_PM1_Worn%20view.png?wid=2048&hei=2048",
       "categoryId": "8",
-      "authorId": "1"
+      "authorId": "1",
+      "User": {
+        "id": "2",
+        "username": "customer",
+        "email": "customer@mail.com",
+        "password": "customer",
+        "role": "customer",
+        "phoneNumber": "0822222",
+        "address": "Cipete"
+      },
+      "Category": {
+        "id": "9",
+        "name": "Accessories"
+      },
+      "Images": [
+        {
+          "id": "3",
+          "productId": "2",
+          "imgUrl": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-city-keepall-monogram-eclipse-canvas-bags--M45936_PM2_Front%20view.png?wid=1240&hei=1240"
+        },
+        {
+          "id": "4",
+          "productId": "2",
+          "imgUrl": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-city-keepall-monogram-eclipse-canvas-bags--M45936_PM1_Side%20view.png?wid=1240&hei=1240"
+        }
+      ]
     },
     {
       "id": "3",
@@ -90,7 +140,32 @@
       "price": "3400",
       "mainImg": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-briefcase-lv-aerogram-bags--M59159_PM1_Worn%20view.png?wid=2048&hei=2048",
       "categoryId": "8",
-      "authorId": "1"
+      "authorId": "1",
+      "User": {
+        "id": "2",
+        "username": "customer",
+        "email": "customer@mail.com",
+        "password": "customer",
+        "role": "customer",
+        "phoneNumber": "0822222",
+        "address": "Cipete"
+      },
+      "Category": {
+        "id": "9",
+        "name": "Accessories"
+      },
+      "Images": [
+        {
+          "id": "5",
+          "productId": "3",
+          "imgUrl": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-briefcase-lv-aerogram-bags--M59159_PM2_Front%20view.png?wid=1240&hei=1240"
+        },
+        {
+          "id": "6",
+          "productId": "3",
+          "imgUrl": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-briefcase-lv-aerogram-bags--M59159_PM1_Side%20view.png?wid=1240&hei=1240"
+        }
+      ]
     },
     {
       "id": "4",
@@ -100,7 +175,32 @@
       "price": "590",
       "mainImg": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-lv-initiales-40mm-reversible-monogram-eclipse-canvas-belts--M9043U_PM1_Worn%20view.png?wid=2048&hei=2048",
       "categoryId": "9",
-      "authorId": "1"
+      "authorId": "1",
+      "User": {
+        "id": "2",
+        "username": "customer",
+        "email": "customer@mail.com",
+        "password": "customer",
+        "role": "customer",
+        "phoneNumber": "0822222",
+        "address": "Cipete"
+      },
+      "Category": {
+        "id": "10",
+        "name": "Shoes"
+      },
+      "Images": [
+        {
+          "id": "7",
+          "productId": "4",
+          "imgUrl": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-lv-initiales-40mm-reversible-monogram-eclipse-canvas-belts--M9043U_PM2_Front%20view.png?wid=2048&hei=2048"
+        },
+        {
+          "id": "8",
+          "productId": "4",
+          "imgUrl": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-lv-initiales-40mm-reversible-monogram-eclipse-canvas-belts--M9043U_PM1_Other%20view.png?wid=1240&hei=1240"
+        }
+      ]
     },
     {
       "id": "5",
@@ -110,7 +210,32 @@
       "price": "635",
       "mainImg": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-monogram-essential-cap-s00-hats-and-gloves--M76584_PM1_Worn%20view.png?wid=2048&hei=2048",
       "categoryId": "9",
-      "authorId": "1"
+      "authorId": "1",
+      "User": {
+        "id": "2",
+        "username": "customer",
+        "email": "customer@mail.com",
+        "password": "customer",
+        "role": "customer",
+        "phoneNumber": "0822222",
+        "address": "Cipete"
+      },
+      "Category": {
+        "id": "10",
+        "name": "Shoes"
+      },
+      "Images": [
+        {
+          "id": "9",
+          "productId": "5",
+          "imgUrl": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-monogram-essential-cap-s00-hats-and-gloves--M76584_PM2_Front%20view.png?wid=2048&hei=2048"
+        },
+        {
+          "id": "10",
+          "productId": "5",
+          "imgUrl": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-monogram-essential-cap-s00-hats-and-gloves--M76584_PM1_Side%20view.png?wid=1240&hei=1240"
+        }
+      ]
     },
     {
       "id": "6",
@@ -120,7 +245,32 @@
       "price": "610",
       "mainImg": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-lv-air-square-sunglasses-s00-new-this-season--Z1706U_PM1_Worn%20view.png?wid=2048&hei=2048",
       "categoryId": "9",
-      "authorId": "1"
+      "authorId": "1",
+      "User": {
+        "id": "2",
+        "username": "customer",
+        "email": "customer@mail.com",
+        "password": "customer",
+        "role": "customer",
+        "phoneNumber": "0822222",
+        "address": "Cipete"
+      },
+      "Category": {
+        "id": "10",
+        "name": "Shoes"
+      },
+      "Images": [
+        {
+          "id": "11",
+          "productId": "6",
+          "imgUrl": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-lv-air-square-sunglasses-s00-new-this-season--Z1706U_PM2_Front%20view.png?wid=2048&hei=2048"
+        },
+        {
+          "id": "12",
+          "productId": "6",
+          "imgUrl": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-lv-air-square-sunglasses-s00-new-this-season--Z1706U_PM1_Side%20view.png?wid=1240&hei=1240"
+        }
+      ]
     },
     {
       "id": "7",
@@ -130,7 +280,28 @@
       "price": "1180",
       "mainImg": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-archlight-slingback-pump-shoes--AN5E1ISL02_PM1_Worn%20view.png?wid=2048&hei=2048",
       "categoryId": "10",
-      "authorId": "1"
+      "authorId": "1",
+      "User": {
+        "id": "2",
+        "username": "customer",
+        "email": "customer@mail.com",
+        "password": "customer",
+        "role": "customer",
+        "phoneNumber": "0822222",
+        "address": "Cipete"
+      },
+      "Images": [
+        {
+          "id": "13",
+          "productId": "7",
+          "imgUrl": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-archlight-slingback-pump-shoes--AN5E1ISL02_PM2_Front%20view.png?wid=2048&hei=2048"
+        },
+        {
+          "id": "14",
+          "productId": "7",
+          "imgUrl": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-archlight-slingback-pump-shoes--AN5E1ISL02_PM1_Closeup%20view.png?wid=1240&hei=1240"
+        }
+      ]
     },
     {
       "id": "8",
@@ -140,7 +311,28 @@
       "price": "1310",
       "mainImg": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-academy-loafer-shoes--AIAL4BPC02_PM1_Worn%20view.png?wid=2048&hei=2048",
       "categoryId": "10",
-      "authorId": "1"
+      "authorId": "1",
+      "User": {
+        "id": "2",
+        "username": "customer",
+        "email": "customer@mail.com",
+        "password": "customer",
+        "role": "customer",
+        "phoneNumber": "0822222",
+        "address": "Cipete"
+      },
+      "Images": [
+        {
+          "id": "15",
+          "productId": "8",
+          "imgUrl": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-academy-loafer-shoes--AIAL4BPC02_PM2_Front%20view.png?wid=2048&hei=2048"
+        },
+        {
+          "id": "16",
+          "productId": "8",
+          "imgUrl": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-academy-loafer-shoes--AIAL4BPC02_PM1_Interior2%20view.png?wid=1240&hei=1240"
+        }
+      ]
     },
     {
       "id": "9",
@@ -150,7 +342,28 @@
       "price": "915",
       "mainImg": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-revival-flat-mule-shoes--ANVH3ALKRC_PM1_Worn%20view.png?wid=2048&hei=2048",
       "categoryId": "10",
-      "authorId": "1"
+      "authorId": "1",
+      "User": {
+        "id": "2",
+        "username": "customer",
+        "email": "customer@mail.com",
+        "password": "customer",
+        "role": "customer",
+        "phoneNumber": "0822222",
+        "address": "Cipete"
+      },
+      "Images": [
+        {
+          "id": "17",
+          "productId": "9",
+          "imgUrl": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-revival-flat-mule-shoes--ANVH3ALKRC_PM2_Front%20view.png?wid=2048&hei=2048"
+        },
+        {
+          "id": "18",
+          "productId": "9",
+          "imgUrl": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-revival-flat-mule-shoes--ANVH3ALKRC_PM1_Closeup%20view.png?wid=1240&hei=1240"
+        }
+      ]
     },
     {
       "id": "10",
@@ -160,7 +373,32 @@
       "price": "4650",
       "mainImg": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-lv-diamonds-pav%C3%A9-v-ring-platinum-jewelry--Q9Y47F_PM1_Worn%20view.png?wid=2048&hei=2048",
       "categoryId": "6",
-      "authorId": "1"
+      "authorId": "1",
+      "User": {
+        "id": "2",
+        "username": "customer",
+        "email": "customer@mail.com",
+        "password": "customer",
+        "role": "customer",
+        "phoneNumber": "0822222",
+        "address": "Cipete"
+      },
+      "Category": {
+        "id": "7",
+        "name": "Clothes"
+      },
+      "Images": [
+        {
+          "id": "19",
+          "productId": "10",
+          "imgUrl": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-lv-diamonds-pav%C3%A9-v-ring-platinum-jewelry--Q9Y47F_PM2_Front%20view.png?wid=2048&hei=2048"
+        },
+        {
+          "id": "20",
+          "productId": "10",
+          "imgUrl": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-lv-diamonds-pav%C3%A9-v-ring-platinum-jewelry--Q9Y47F_PM1_Side%20view.png?wid=1240&hei=1240"
+        }
+      ]
     },
     {
       "id": "11",
@@ -170,7 +408,32 @@
       "price": "1600",
       "mainImg": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-lv-diamonds-2-5mm-wedding-band-platinum-jewelry--Q9Y49F_PM1_Worn%20view.png?wid=2048&hei=2048",
       "categoryId": "6",
-      "authorId": "1"
+      "authorId": "1",
+      "User": {
+        "id": "2",
+        "username": "customer",
+        "email": "customer@mail.com",
+        "password": "customer",
+        "role": "customer",
+        "phoneNumber": "0822222",
+        "address": "Cipete"
+      },
+      "Category": {
+        "id": "7",
+        "name": "Clothes"
+      },
+      "Images": [
+        {
+          "id": "21",
+          "productId": "11",
+          "imgUrl": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-lv-diamonds-2-5mm-wedding-band-platinum-jewelry--Q9Y49F_PM2_Front%20view.png?wid=2048&hei=2048"
+        },
+        {
+          "id": "22",
+          "productId": "11",
+          "imgUrl": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-lv-diamonds-2-5mm-wedding-band-platinum-jewelry--Q9Y49F_PM1_Cropped%20view.png?wid=1240&hei=1240"
+        }
+      ]
     },
     {
       "id": "12",
@@ -180,7 +443,32 @@
       "price": "3250",
       "mainImg": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-lv-diamonds-pendant-lv-monogram-star-cut-jewelry--Q03018_PM1_Worn%20view.png?wid=2048&hei=2048",
       "categoryId": "6",
-      "authorId": "1"
+      "authorId": "1",
+      "User": {
+        "id": "2",
+        "username": "customer",
+        "email": "customer@mail.com",
+        "password": "customer",
+        "role": "customer",
+        "phoneNumber": "0822222",
+        "address": "Cipete"
+      },
+      "Category": {
+        "id": "7",
+        "name": "Clothes"
+      },
+      "Images": [
+        {
+          "id": "23",
+          "productId": "12",
+          "imgUrl": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-lv-diamonds-pendant-lv-monogram-star-cut-jewelry--Q03018_PM2_Front%20view.png?wid=2048&hei=2048"
+        },
+        {
+          "id": "24",
+          "productId": "12",
+          "imgUrl": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-lv-diamonds-pendant-lv-monogram-star-cut-jewelry--Q03018_PM1_Interior%20view.png?wid=1240&hei=1240"
+        }
+      ]
     },
     {
       "id": "13",
@@ -190,7 +478,32 @@
       "price": "3955",
       "mainImg": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-tambour-monogram-watches-and-jewelry--QBB107_PM2_Front%20view.png?wid=2048&hei=2048",
       "categoryId": "5",
-      "authorId": "1"
+      "authorId": "1",
+      "User": {
+        "id": "2",
+        "username": "customer",
+        "email": "customer@mail.com",
+        "password": "customer",
+        "role": "customer",
+        "phoneNumber": "0822222",
+        "address": "Cipete"
+      },
+      "Category": {
+        "id": "6",
+        "name": "Jewelry"
+      },
+      "Images": [
+        {
+          "id": "25",
+          "productId": "13",
+          "imgUrl": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-tambour-monogram-watches-and-jewelry--QBB107_PM1_Side%20view.png?wid=2048&hei=2048"
+        },
+        {
+          "id": "26",
+          "productId": "13",
+          "imgUrl": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-tambour-monogram-watches-and-jewelry--QBB107_PM1_Back%20view.png?wid=1240&hei=1240"
+        }
+      ]
     },
     {
       "id": "14",
@@ -200,7 +513,32 @@
       "price": "6770",
       "mainImg": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-tambour-moon-dual-time-35mm-watches--QBB182_PM2_Front%20view.png?wid=2048&hei=2048",
       "categoryId": "5",
-      "authorId": "1"
+      "authorId": "1",
+      "User": {
+        "id": "2",
+        "username": "customer",
+        "email": "customer@mail.com",
+        "password": "customer",
+        "role": "customer",
+        "phoneNumber": "0822222",
+        "address": "Cipete"
+      },
+      "Category": {
+        "id": "6",
+        "name": "Jewelry"
+      },
+      "Images": [
+        {
+          "id": "27",
+          "productId": "14",
+          "imgUrl": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-tambour-moon-dual-time-35mm-watches--QBB182_PM1_Side%20view.png?wid=2048&hei=2048"
+        },
+        {
+          "id": "28",
+          "productId": "14",
+          "imgUrl": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-tambour-moon-dual-time-35mm-watches--QBB182_PM1_Back%20view.png?wid=1240&hei=1240"
+        }
+      ]
     },
     {
       "id": "15",
@@ -210,7 +548,32 @@
       "price": "5755",
       "mainImg": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-tambour-monogram-28mm-watches--QBB165_PM2_Front%20view.png?wid=2048&hei=2048",
       "categoryId": "5",
-      "authorId": "1"
+      "authorId": "1",
+      "User": {
+        "id": "2",
+        "username": "customer",
+        "email": "customer@mail.com",
+        "password": "customer",
+        "role": "customer",
+        "phoneNumber": "0822222",
+        "address": "Cipete"
+      },
+      "Category": {
+        "id": "6",
+        "name": "Jewelry"
+      },
+      "Images": [
+        {
+          "id": "29",
+          "productId": "15",
+          "imgUrl": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-tambour-monogram-28mm-watches--QBB165_PM1_Side%20view.png?wid=2048&hei=2048"
+        },
+        {
+          "id": "30",
+          "productId": "15",
+          "imgUrl": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-tambour-monogram-28mm-watches--QBB165_PM1_Back%20view.png?wid=1240&hei=1240"
+        }
+      ]
     },
     {
       "id": "16",
@@ -220,7 +583,32 @@
       "price": "365",
       "mainImg": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-nuit-de-feu-fragrances--LP0167_PM2_Front%20view.png?wid=2048&hei=2048",
       "categoryId": "4",
-      "authorId": "1"
+      "authorId": "1",
+      "User": {
+        "id": "2",
+        "username": "customer",
+        "email": "customer@mail.com",
+        "password": "customer",
+        "role": "customer",
+        "phoneNumber": "0822222",
+        "address": "Cipete"
+      },
+      "Category": {
+        "id": "5",
+        "name": "Watches"
+      },
+      "Images": [
+        {
+          "id": "32",
+          "productId": "16",
+          "imgUrl": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-nuit-de-feu-fragrances--LP0167_PM1_Detail%20view.png?wid=1240&hei=1240"
+        },
+        {
+          "id": "31",
+          "productId": "16",
+          "imgUrl": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-nuit-de-feu-fragrances--LP0167_PM1_Side%20view.png?wid=2048&hei=2048"
+        }
+      ]
     },
     {
       "id": "17",
@@ -230,7 +618,32 @@
       "price": "280",
       "mainImg": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-l-immensit%C3%A9-fragrances--LP0052_PM2_Front%20view.png?wid=2048&hei=2048",
       "categoryId": "4",
-      "authorId": "1"
+      "authorId": "1",
+      "User": {
+        "id": "2",
+        "username": "customer",
+        "email": "customer@mail.com",
+        "password": "customer",
+        "role": "customer",
+        "phoneNumber": "0822222",
+        "address": "Cipete"
+      },
+      "Category": {
+        "id": "5",
+        "name": "Watches"
+      },
+      "Images": [
+        {
+          "id": "33",
+          "productId": "17",
+          "imgUrl": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-l-immensit%C3%A9-fragrances--LP0052_PM1_Other%20view2.png?wid=1240&hei=1240"
+        },
+        {
+          "id": "34",
+          "productId": "17",
+          "imgUrl": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-l-immensit%C3%A9-fragrances--LP0052_PM1_Back%20view.png?wid=1240&hei=1240"
+        }
+      ]
     },
     {
       "id": "18",
@@ -240,7 +653,32 @@
       "price": "480",
       "mainImg": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-slender-wallet-monogram-eclipse-canvas-small-leather-goods--M80906_PM2_Front%20view.png?wid=2048&hei=2048",
       "categoryId": "3",
-      "authorId": "1"
+      "authorId": "1",
+      "User": {
+        "id": "2",
+        "username": "customer",
+        "email": "customer@mail.com",
+        "password": "customer",
+        "role": "customer",
+        "phoneNumber": "0822222",
+        "address": "Cipete"
+      },
+      "Category": {
+        "id": "4",
+        "name": "Fragrances"
+      },
+      "Images": [
+        {
+          "id": "35",
+          "productId": "18",
+          "imgUrl": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-slender-wallet-monogram-eclipse-canvas-small-leather-goods--M80906_PM1_Side%20view.png?wid=2048&hei=2048"
+        },
+        {
+          "id": "36",
+          "productId": "18",
+          "imgUrl": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-slender-wallet-monogram-eclipse-canvas-small-leather-goods--M80906_PM1_Back%20view.png?wid=1240&hei=1240"
+        }
+      ]
     },
     {
       "id": "19",
@@ -250,7 +688,27 @@
       "price": "475",
       "mainImg": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-petit-damier-scarf-nm-s00-scarves--M70030_PM1_Worn%20view.png?wid=2048&hei=2048",
       "categoryId": "3",
-      "authorId": "1"
+      "authorId": "1",
+      "User": {
+        "id": "2",
+        "username": "customer",
+        "email": "customer@mail.com",
+        "password": "customer",
+        "role": "customer",
+        "phoneNumber": "0822222",
+        "address": "Cipete"
+      },
+      "Category": {
+        "id": "4",
+        "name": "Fragrances"
+      },
+      "Images": [
+        {
+          "id": "37",
+          "productId": "19",
+          "imgUrl": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-petit-damier-scarf-nm-s00-scarves--M70030_PM2_Front%20view.png?wid=2048&hei=2048"
+        }
+      ]
     },
     {
       "id": "20",
@@ -260,7 +718,27 @@
       "price": "3200",
       "mainImg": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-jet-pocket-blouson-ready-to-wear--HOFB1WMV6910_PM1_Worn%20view.png?wid=2048&hei=2048",
       "categoryId": "7",
-      "authorId": "1"
+      "authorId": "1",
+      "User": {
+        "id": "2",
+        "username": "customer",
+        "email": "customer@mail.com",
+        "password": "customer",
+        "role": "customer",
+        "phoneNumber": "0822222",
+        "address": "Cipete"
+      },
+      "Category": {
+        "id": "8",
+        "name": "Bags"
+      },
+      "Images": [
+        {
+          "id": "38",
+          "productId": "20",
+          "imgUrl": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-jet-pocket-blouson-ready-to-wear--HOFB1WMV6910_PM2_Front%20view.png?wid=2048&hei=2048"
+        }
+      ]
     },
     {
       "id": "21",
@@ -270,7 +748,27 @@
       "price": "820",
       "mainImg": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-regular-dna-collar-shirt-ready-to-wear--HOFS6WMU9704_PM1_Worn%20view.png?wid=2048&hei=2048",
       "categoryId": "7",
-      "authorId": "1"
+      "authorId": "1",
+      "User": {
+        "id": "2",
+        "username": "customer",
+        "email": "customer@mail.com",
+        "password": "customer",
+        "role": "customer",
+        "phoneNumber": "0822222",
+        "address": "Cipete"
+      },
+      "Category": {
+        "id": "8",
+        "name": "Bags"
+      },
+      "Images": [
+        {
+          "id": "39",
+          "productId": "21",
+          "imgUrl": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-regular-dna-collar-shirt-ready-to-wear--HOFS6WMU9704_PM2_Front%20view.png?wid=2048&hei=2048"
+        }
+      ]
     },
     {
       "id": "22",
@@ -280,7 +778,32 @@
       "price": "2200",
       "mainImg": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-d-ring-turtleneck-sweater-ready-to-wear--FNKL92TL8002_PM1_Worn%20view.png?wid=2048&hei=2048",
       "categoryId": "2",
-      "authorId": "1"
+      "authorId": "1",
+      "User": {
+        "id": "2",
+        "username": "customer",
+        "email": "customer@mail.com",
+        "password": "customer",
+        "role": "customer",
+        "phoneNumber": "0822222",
+        "address": "Cipete"
+      },
+      "Category": {
+        "id": "3",
+        "name": "Gifts"
+      },
+      "Images": [
+        {
+          "id": "40",
+          "productId": "22",
+          "imgUrl": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-d-ring-turtleneck-sweater-ready-to-wear--FNKL92TL8002_PM2_Front%20view.png?wid=2048&hei=2048"
+        },
+        {
+          "id": "41",
+          "productId": "22",
+          "imgUrl": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-d-ring-turtleneck-sweater-ready-to-wear--FNKL92TL8002_PM1_Cropped%20view.png?wid=1240&hei=1240"
+        }
+      ]
     },
     {
       "id": "23",
@@ -290,7 +813,32 @@
       "price": "5400",
       "mainImg": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-signature-double-face-short-wrap-coat-ready-to-wear--FNCO19QWE125_PM1_Worn%20view.png?wid=2048&hei=2048",
       "categoryId": "2",
-      "authorId": "1"
+      "authorId": "1",
+      "User": {
+        "id": "2",
+        "username": "customer",
+        "email": "customer@mail.com",
+        "password": "customer",
+        "role": "customer",
+        "phoneNumber": "0822222",
+        "address": "Cipete"
+      },
+      "Category": {
+        "id": "3",
+        "name": "Gifts"
+      },
+      "Images": [
+        {
+          "id": "42",
+          "productId": "23",
+          "imgUrl": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-signature-double-face-short-wrap-coat-ready-to-wear--FNCO19QWE125_PM2_Front%20view.png?wid=2048&hei=2048"
+        },
+        {
+          "id": "43",
+          "productId": "23",
+          "imgUrl": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-signature-double-face-short-wrap-coat-ready-to-wear--FNCO19QWE125_PM1_Cropped%20view.png?wid=1240&hei=1240"
+        }
+      ]
     },
     {
       "id": "24",
@@ -300,7 +848,32 @@
       "price": "4000",
       "mainImg": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-xl-shoulder-oversized-jacket-ready-to-wear--HNJ65WOY9002_PM1_Worn%20view.png?wid=2048&hei=2048",
       "categoryId": "1",
-      "authorId": "1"
+      "authorId": "1",
+      "User": {
+        "id": "2",
+        "username": "customer",
+        "email": "customer@mail.com",
+        "password": "customer",
+        "role": "customer",
+        "phoneNumber": "0822222",
+        "address": "Cipete"
+      },
+      "Category": {
+        "id": "2",
+        "name": "Women"
+      },
+      "Images": [
+        {
+          "id": "44",
+          "productId": "24",
+          "imgUrl": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-xl-shoulder-oversized-jacket-ready-to-wear--HNJ65WOY9002_PM2_Front%20view.png?wid=2048&hei=2048"
+        },
+        {
+          "id": "45",
+          "productId": "24",
+          "imgUrl": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-xl-shoulder-oversized-jacket-ready-to-wear--HNJ65WOY9002_PM1_Cropped%20view.png?wid=1240&hei=1240"
+        }
+      ]
     },
     {
       "id": "25",
@@ -310,7 +883,32 @@
       "price": "2630",
       "mainImg": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-workwear-chore-coat-ready-to-wear--HNB72WND9152_PM1_Worn%20view.png?wid=2048&hei=2048",
       "categoryId": "1",
-      "authorId": "1"
+      "authorId": "1",
+      "User": {
+        "id": "2",
+        "username": "customer",
+        "email": "customer@mail.com",
+        "password": "customer",
+        "role": "customer",
+        "phoneNumber": "0822222",
+        "address": "Cipete"
+      },
+      "Category": {
+        "id": "2",
+        "name": "Women"
+      },
+      "Images": [
+        {
+          "id": "46",
+          "productId": "25",
+          "imgUrl": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-workwear-chore-coat-ready-to-wear--HNB72WND9152_PM2_Front%20view.png?wid=2048&hei=2048"
+        },
+        {
+          "id": "47",
+          "productId": "25",
+          "imgUrl": "https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-workwear-chore-coat-ready-to-wear--HNB72WND9152_PM1_Cropped%20view.png?wid=1240&hei=1240"
+        }
+      ]
     }
   ],
   "Images": [
