@@ -1,5 +1,6 @@
+import { Link } from 'react-router-dom'
 export default function Sidebar() {
-    return (
+  return (
     <aside
       id="sidebar"
       className="flex hidden fixed top-0 left-0 z-20 flex-col flex-shrink-0 w-64 h-full duration-75 lg:flex transition-width"
@@ -10,8 +11,8 @@ export default function Sidebar() {
           <div className="flex-1 px-3 space-y-1 bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
             <ul className="pb-2 space-y-2">
               <li>
-                <a
-                  href="http://localhost:1313/"
+                <Link
+                  to="/"
                   className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700"
                 >
                   <svg
@@ -25,12 +26,12 @@ export default function Sidebar() {
                   <span className="ml-3">
                     Dashboard
                   </span>
-                </a>
+                </Link>
               </li>
 
               <li>
-                <a
-                  href="http://localhost:1313/"
+                <Link
+                  to="/categories"
                   className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700"
                 >
                   <svg
@@ -48,13 +49,12 @@ export default function Sidebar() {
                   <span className="ml-3">
                     Categories
                   </span>
-                </a>
+                </Link>
               </li>
             </ul>
             <div className="pt-2 space-y-2">
-              <a
-                href="https://flowbite.com/docs/getting-started/introduction/"
-                target="_blank"
+              <Link
+                to="/register"
                 className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg transition duration-75 hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700"
               >
                 <svg
@@ -68,7 +68,7 @@ export default function Sidebar() {
                 <span className="ml-3">
                   Register Admin
                 </span>
-              </a>
+              </Link>
               <a
                 href="https://flowbite.com/docs/components/alerts/"
                 target="_blank"
@@ -95,5 +95,5 @@ export default function Sidebar() {
         </div>
       </div>
     </aside>
-    )
+  )
 }

@@ -1,22 +1,21 @@
 import { useState, useEffect } from 'react'
+import useFetch from './hooks/useFetch'
 export default function RegisterAdmin() {
-    const [user, setUser] = useState({})
+    const [user, setUser] = useState({
+        username: '',
+        email: '',
+        password: '',
+        phoneNumber: '',
+        address: ''
+    })
 
-    const loginhandler = () => {
-        const postData = async () => {
-            const response = await fetch(`http://localhost:3000/Users`, {
-                method: 'POST',
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(user)
-            });
-            const json = await response.json();
-            setUser(json);
-        }
+    const { fetching } = useFetch("http://localhost:3000/Users", "POST", {
+        "Content-Type": "application/json"
+    }, user)
 
-        postData()
-            .catch(console.error);;
+    const handleRegister = (e) => {
+        e.preventDefault()
+        fetching()
     }
 
     const onChangeHandler = (e) => {
@@ -43,7 +42,7 @@ export default function RegisterAdmin() {
                     </div>
                 </div>
             </div>
-            <form onSubmit={loginhandler}>
+            <form onSubmit={handleRegister}>
                 <div className="grid gap-6 mt-6 mb-6 md:grid-cols-2">
                     <div>
                         <label forhtml="username"

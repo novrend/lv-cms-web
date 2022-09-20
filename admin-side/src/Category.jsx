@@ -1,18 +1,6 @@
-import { useState, useEffect } from 'react'
+import useFetch from './hooks/useFetch'
 export default function Category() {
-    const [categories, setCategories] = useState([])
-
-    useEffect(() => {
-        // declare the async data fetching function
-        const fetchData = async () => {
-            const response = await fetch(`http://localhost:3000/Categories`);
-            const json = await response.json();
-            setCategories(json);
-        }
-
-        fetchData()
-            .catch(console.error);;
-    }, [])
+    const { data: categories } = useFetch('http://localhost:3000/Categories', "GET", null, null)
 
     return (
         <section>

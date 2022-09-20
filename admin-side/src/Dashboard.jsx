@@ -1,18 +1,6 @@
-import { useState, useEffect } from 'react'
+import useFetch from './hooks/useFetch'
 export default function Dashboard() {
-    const [products, setProducts] = useState([])
-
-    useEffect(() => {
-        const fetchData = async () => {
-            const response = await fetch(`http://localhost:3000/Products`);
-            const json = await response.json();
-            setProducts(json);
-        }
-
-        fetchData()
-            .catch(console.error);;
-    }, [])
-
+    const { data: products } = useFetch('http://localhost:3000/Products', "GET", null, null)
     return (
         <section>
             <div
@@ -82,25 +70,25 @@ export default function Dashboard() {
                                         return (
                                             <tr className="hover:bg-gray-100 dark:hover:bg-gray-700" key={product.id}>
                                                 <td
-                                                    className="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                    className="p-4 text-base text-gray-900 whitespace-nowrap dark:text-white">
                                                     {i + 1}</td>
                                                 <td
                                                     className="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
-                                                    <div className="text-base font-semibold text-gray-900 dark:text-white">
+                                                    <div className="text-base text-gray-900 dark:text-white">
                                                         {product.name}</div>
                                                 </td>
                                                 <td
-                                                    className="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                    className="p-4 text-base text-gray-900 whitespace-nowrap dark:text-white">
                                                     {product.categoryId}</td>
                                                 <td
-                                                    className="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                    className="p-4 text-base text-gray-900 whitespace-nowrap dark:text-white">
                                                     {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(product.price)}</td>
                                                 <td
-                                                    className="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                    className="p-4 text-base text-gray-900 whitespace-nowrap dark:text-white">
                                                     {product.authorId}</td>
                                                 <td className="p-4 space-x-2 whitespace-nowrap">
                                                     <button type="button" data-modal-toggle="product-modal"
-                                                        className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-primary-700 rounded-lg hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                                                        className="inline-flex items-center px-3 py-2 text-sm text-center text-white bg-primary-700 rounded-lg hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
                                                         <svg className="w-5 h-5 mr-2" fill="currentColor"
                                                             viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                                             <path fillRule="evenodd"
@@ -112,7 +100,7 @@ export default function Dashboard() {
                                                 </td>
                                                 <td className="p-4 space-x-2 whitespace-nowrap text-right">
                                                     <button type="button" data-modal-toggle="product-modal"
-                                                        className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-primary-700 rounded-lg hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                                                        className="inline-flex items-center px-3 py-2 text-sm text-center text-white bg-primary-700 rounded-lg hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
                                                         <svg className="w-5 h-5 mr-2" fill="currentColor"
                                                             viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                                             <path
@@ -125,7 +113,7 @@ export default function Dashboard() {
                                                         Edit item
                                                     </button>
                                                     <button type="button" data-modal-toggle="delete-product-modal"
-                                                        className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
+                                                        className="inline-flex items-center px-3 py-2 text-sm text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
                                                         <svg className="w-5 h-5 mr-2" fill="currentColor"
                                                             viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                                             <path fillRule="evenodd"
