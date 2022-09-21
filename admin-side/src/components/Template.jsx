@@ -1,6 +1,9 @@
 import Sidebar from "./Sidebar";
-import { Outlet } from "react-router-dom";
+import { Outlet, Navigate } from "react-router-dom";
 export default function Template() {
+    if (!localStorage.getItem('access_token')) {
+        return <Navigate to={"/login"} />;
+    }
     return (
         <div className="flex overflow-hidden bg-gray-50">
             <Sidebar />

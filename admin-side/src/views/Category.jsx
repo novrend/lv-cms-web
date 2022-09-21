@@ -1,9 +1,55 @@
-import useFetch from './hooks/useFetch'
+import { useSelector, useDispatch } from 'react-redux'
+import { useEffect } from 'react'
+import { categoriesFetch, categoryDelete } from '../store/categoriesActions'
+import AddCategory from '../components/AddCategory'
+import { useState } from 'react'
+import EditCategory from '../components/EditCategory'
+import ModalConfirmation from '../components/ModalConfirmation'
+import { fetching } from '../helpers'
 export default function Category() {
-    const { data: categories } = useFetch('http://localhost:3000/Categories', "GET", null, null)
+    const [addClicked, setAddClicked] = useState(false)
+    const [editClicked, setEditClicked] = useState(false)
+    const [deleteClicked, setDeleteClicked] = useState(false)
+    const [choosenId, setChoosenId] = useState(0)
+    const [category, setCategory] = useState({})
+    const { categories } = useSelector((state) => {
+        return state.categoryReducer
+    })
 
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(categoriesFetch())
+    }, []);
+
+    function addClickHandler() {
+        addClicked ? setAddClicked(false) : setAddClicked(true)
+    }
+    function deleteClickHandler(e) {
+        setChoosenId(e.target.id)
+        deleteClicked ? setDeleteClicked(false) : setDeleteClicked(true)
+    }
+    function deleteHandler() {
+        dispatch(categoryDelete(choosenId))
+        setDeleteClicked(false)
+    }
+    function switchEditModal() {
+        editClicked ? setEditClicked(false) : setEditClicked(true)
+    }
+    function editClickHandler(e) {
+        fetching(`http://localhost:3000/Categories/${e.target.id}`)
+            .then((resp) => {
+                setCategory(resp);
+            })
+            .then(() => {
+                switchEditModal()
+            })
+    }
     return (
         <section>
+            {addClicked && <AddCategory clicked={addClickHandler} />}
+            {editClicked && <EditCategory switch={switchEditModal} category={category} />}
+            {deleteClicked && <ModalConfirmation clicked={deleteClickHandler} confirmed={deleteHandler} />}
             <div
                 className="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5">
                 <div className="w-full mb-1">
@@ -15,12 +61,13 @@ export default function Category() {
                                 </h1>
                             </div>
                             <button type="button" data-modal-toggle="add-category-modal"
+                                onClick={addClickHandler}
                                 className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:ml-auto">
                                 <svg className="w-6 h-6 mr-2 -ml-1" fill="currentColor" viewBox="0 0 20 20"
                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd"
+                                    <path fillRule="evenodd"
                                         d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                                        clip-rule="evenodd"></path>
+                                        clipRule="evenodd"></path>
                                 </svg>
                                 Add category
                             </button>
@@ -62,25 +109,29 @@ export default function Category() {
                                                     {category.name}</td>
                                                 <td className="p-4 space-x-2 whitespace-nowrap text-right">
                                                     <button type="button" data-modal-toggle="category-modal"
+                                                        id={category.id}
+                                                        onClick={editClickHandler}
                                                         className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300">
                                                         <svg className="w-5 h-5 mr-2" fill="currentColor"
                                                             viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                                             <path
                                                                 d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z">
                                                             </path>
-                                                            <path fill-rule="evenodd"
+                                                            <path fillRule="evenodd"
                                                                 d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
-                                                                clip-rule="evenodd"></path>
+                                                                clipRule="evenodd"></path>
                                                         </svg>
                                                         Edit item
                                                     </button>
                                                     <button type="button" data-modal-toggle="delete-category-modal"
+                                                        id={category.id}
+                                                        onClick={deleteClickHandler}
                                                         className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300">
                                                         <svg className="w-5 h-5 mr-2" fill="currentColor"
                                                             viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                            <path fill-rule="evenodd"
+                                                            <path fillRule="evenodd"
                                                                 d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
-                                                                clip-rule="evenodd"></path>
+                                                                clipRule="evenodd"></path>
                                                         </svg>
                                                         Delete item
                                                     </button>

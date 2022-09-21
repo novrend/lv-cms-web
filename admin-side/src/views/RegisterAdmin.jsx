@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react'
-import useFetch from './hooks/useFetch'
+import { useState } from 'react'
+import { fetching } from '../helpers'
 export default function RegisterAdmin() {
     const [user, setUser] = useState({
         username: '',
@@ -9,13 +9,12 @@ export default function RegisterAdmin() {
         address: ''
     })
 
-    const { fetching } = useFetch("http://localhost:3000/Users", "POST", {
-        "Content-Type": "application/json"
-    }, user)
-
     const handleRegister = (e) => {
         e.preventDefault()
-        fetching()
+        fetching("http://localhost:3000/Users", "POST", { "Content-Type": "application/json" }, user)
+            .then((resp) => {
+                setUser(resp);
+            })
     }
 
     const onChangeHandler = (e) => {

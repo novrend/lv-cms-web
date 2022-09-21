@@ -1,5 +1,10 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 export default function Sidebar() {
+  const navigate = useNavigate();
+  function logoutHander() {
+    localStorage.clear()
+    navigate('/login')
+  }
   return (
     <aside
       id="sidebar"
@@ -69,9 +74,9 @@ export default function Sidebar() {
                   Register Admin
                 </span>
               </Link>
-              <a
-                href="https://flowbite.com/docs/components/alerts/"
-                target="_blank"
+              <button
+                onClick={logoutHander}
+                type="button"
                 className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg transition duration-75 hover:bg-gray-100 group"
               >
                 <svg
@@ -89,7 +94,7 @@ export default function Sidebar() {
                 <span className="ml-3">
                   Log Out
                 </span>
-              </a>
+              </button>
             </div>
           </div>
         </div>

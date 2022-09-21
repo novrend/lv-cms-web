@@ -1,8 +1,65 @@
-import useFetch from './hooks/useFetch'
+import { productDelete, productsFetch } from '../store/productActions'
+import { categoriesFetch } from '../store/categoriesActions'
+import { useSelector, useDispatch } from 'react-redux'
+import { useEffect } from 'react'
+import AddProduct from '../components/AddProduct'
+import EditProduct from '../components/EditProduct'
+import { useState } from 'react'
+import ModalConfirmation from '../components/ModalConfirmation'
+import { fetching } from '../helpers'
 export default function Dashboard() {
-    const { data: products } = useFetch('http://localhost:3000/Products', "GET", null, null)
+    const [addClicked, setAddClicked] = useState(false)
+    const [editClicked, setEditClicked] = useState(false)
+    const [deleteClicked, setDeleteClicked] = useState(false)
+    const [product, setProduct] = useState({})
+    const [choosenId, setChoosenId] = useState()
+
+    const { products } = useSelector((state) => {
+        return state.productReducer
+    })
+
+    const { categories } = useSelector((state) => {
+        return state.categoryReducer
+    })
+
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(categoriesFetch())
+    }, []);
+
+    useEffect(() => {
+        dispatch(productsFetch())
+    }, []);
+
+    function addClickHandler() {
+        addClicked ? setAddClicked(false) : setAddClicked(true)
+    }
+    function deleteClickHandler(e) {
+        setChoosenId(e.target.id)
+        deleteClicked ? setDeleteClicked(false) : setDeleteClicked(true)
+    }
+    function deleteHandler() {
+        dispatch(productDelete(choosenId))
+        setDeleteClicked(false)
+    }
+    function switchEditModal() {
+        editClicked ? setEditClicked(false) : setEditClicked(true)
+    }
+    function editClickHandler(e) {
+        fetching(`http://localhost:3000/Products/${e.target.id}`)
+            .then((resp) => {
+                setProduct(resp);
+            })
+            .then(() => {
+                switchEditModal()
+            })
+    }
     return (
         <section>
+            {addClicked && <AddProduct clicked={addClickHandler} categories={categories} />}
+            {editClicked && <EditProduct clicked={editClickHandler} switch={switchEditModal} product={product} categories={categories} />}
+            {deleteClicked && <ModalConfirmation clicked={deleteClickHandler} confirmed={deleteHandler} />}
             <div
                 className="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5">
                 <div className="w-full mb-1">
@@ -13,7 +70,7 @@ export default function Dashboard() {
                                     products
                                 </h1>
                             </div>
-                            <button type="button" data-modal-toggle="add-product-modal"
+                            <button type="button" onClick={addClickHandler} data-modal-toggle="add-product-modal"
                                 className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:ml-auto">
                                 <svg className="w-6 h-6 mr-2 -ml-1" fill="currentColor" viewBox="0 0 20 20"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -100,6 +157,8 @@ export default function Dashboard() {
                                                 </td>
                                                 <td className="p-4 space-x-2 whitespace-nowrap text-right">
                                                     <button type="button" data-modal-toggle="product-modal"
+                                                        onClick={editClickHandler}
+                                                        id={product.id}
                                                         className="inline-flex items-center px-3 py-2 text-sm text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300">
                                                         <svg className="w-5 h-5 mr-2" fill="currentColor"
                                                             viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -113,6 +172,8 @@ export default function Dashboard() {
                                                         Edit item
                                                     </button>
                                                     <button type="button" data-modal-toggle="delete-product-modal"
+                                                        id={product.id}
+                                                        onClick={deleteClickHandler}
                                                         className="inline-flex items-center px-3 py-2 text-sm text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300">
                                                         <svg className="w-5 h-5 mr-2" fill="currentColor"
                                                             viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -133,6 +194,6 @@ export default function Dashboard() {
                     </div>
                 </div>
             </div>
-        </section>
+        </section >
     )
 }

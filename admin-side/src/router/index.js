@@ -1,9 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
-import Category from "../Category";
-import Dashboard from "../Dashboard";
-import Login from "../Login";
-import RegisterAdmin from "../RegisterAdmin";
-import Template from "../Template";
+import Category from "../views/Category";
+import Dashboard from "../views/Dashboard";
+import Login from "../views/Login";
+import RegisterAdmin from "../views/RegisterAdmin";
+import Template from "../components/Template";
 
 const router = createBrowserRouter([
   {
