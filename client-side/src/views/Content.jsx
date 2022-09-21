@@ -1,8 +1,18 @@
 import { Carousel } from 'flowbite-react'
-import useFetch from './hooks/useFetch'
+import { useEffect } from 'react';
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from 'react-redux'
+import { productsFetch } from '../store/productActions'
 export default function Content() {
-    const { data: products } = useFetch('http://localhost:3000/Products', "GET", null, null)
+    const dispatch = useDispatch()
+
+    const { products } = useSelector((state) => {
+        return state.productReducer
+    })
+
+    useEffect(() => {
+        dispatch(productsFetch())
+    }, []);
     return (
         <div className="grid grid-cols-3 gap-8 p-10 w-full">
             {products.map(product => {

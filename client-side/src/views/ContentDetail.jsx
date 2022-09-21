@@ -1,8 +1,17 @@
+import { useState } from "react"
+import { useEffect } from "react"
 import { useParams } from "react-router-dom"
-import useFetch from "./hooks/useFetch"
+import { fetching } from "../helpers"
+
 export default function ContentDetail() {
+    const [product, setProduct] = useState({})
     const { id } = useParams()
-    const { data: product } = useFetch(`http://localhost:3000/Products/${id}`, 'GET', null, null)
+    useEffect(() => {
+        fetching(`http://localhost:3000/Products/${id}`)
+            .then((resp) => {
+                setProduct(resp)
+            })
+    }, [])
     return (
         <div className="bg-stone-100 grid grid-cols-2 gap-8 w-full items-center">
             <div>

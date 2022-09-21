@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
-import Navbar from "../Navbar";
-import Content from "../Content";
-import ContentDetail from "../ContentDetail";
+import Navbar from "../components/Navbar";
+import Content from "../views/Content";
+import ContentDetail from "../views/ContentDetail";
 
 const router = createBrowserRouter([
   {
