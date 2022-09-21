@@ -5,17 +5,17 @@ export default function Category() {
     return (
         <section>
             <div
-                className="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5 dark:bg-gray-800 dark:border-gray-700">
+                className="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5">
                 <div className="w-full mb-1">
-                    <div className="items-center block sm:flex md:divide-x md:divide-gray-100 dark:divide-gray-700">
+                    <div className="items-center block sm:flex md:divide-x md:divide-gray-100">
                         <div className="flex items-center w-full sm:justify-end">
                             <div className="mb-4">
-                                <h1 className="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">All
+                                <h1 className="text-xl font-semibold text-gray-900 sm:text-2xl">All
                                     categories
                                 </h1>
                             </div>
                             <button type="button" data-modal-toggle="add-category-modal"
-                                className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-primary-700 rounded-lg hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 sm:ml-auto dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                                className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:ml-auto">
                                 <svg className="w-6 h-6 mr-2 -ml-1" fill="currentColor" viewBox="0 0 20 20"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd"
@@ -33,36 +33,36 @@ export default function Category() {
                 <div className="overflow-x-auto">
                     <div className="inline-block min-w-full align-middle">
                         <div className="overflow-hidden shadow">
-                            <table className="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-600">
-                                <thead className="bg-gray-100 dark:bg-gray-700">
+                            <table className="min-w-full divide-y divide-gray-200 table-fixed">
+                                <thead className="bg-gray-100">
                                     <tr>
                                         <th scope="col"
-                                            className="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                            className="p-4 text-xs font-medium text-left text-gray-500 uppercase">
                                             No
                                         </th>
                                         <th scope="col"
-                                            className="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                            className="p-4 text-xs font-medium text-left text-gray-500 uppercase">
                                             Category Name
                                         </th>
                                         <th scope="col"
-                                            className="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                            className="p-4 text-xs font-medium text-left text-gray-500 uppercase">
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody
-                                    className="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
+                                    className="bg-white divide-y divide-gray-200">
                                     {categories.map((category, i) => {
                                         return (
-                                            <tr className="hover:bg-gray-100 dark:hover:bg-gray-700" key={i}>
+                                            <tr className="hover:bg-gray-100" key={i}>
                                                 <td
-                                                    className="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                    className="p-4 text-base font-medium text-gray-900 whitespace-nowrap">
                                                     {i + 1}</td>
                                                 <td
-                                                    className="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                    className="p-4 text-base font-medium text-gray-900 whitespace-nowrap">
                                                     {category.name}</td>
                                                 <td className="p-4 space-x-2 whitespace-nowrap text-right">
                                                     <button type="button" data-modal-toggle="category-modal"
-                                                        className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-primary-700 rounded-lg hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                                                        className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300">
                                                         <svg className="w-5 h-5 mr-2" fill="currentColor"
                                                             viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                                             <path
@@ -75,7 +75,7 @@ export default function Category() {
                                                         Edit item
                                                     </button>
                                                     <button type="button" data-modal-toggle="delete-category-modal"
-                                                        className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
+                                                        className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300">
                                                         <svg className="w-5 h-5 mr-2" fill="currentColor"
                                                             viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                                             <path fill-rule="evenodd"

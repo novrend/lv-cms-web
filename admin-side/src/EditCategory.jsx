@@ -2,13 +2,13 @@ export default function EditCategory() {
     <div className="fixed left-0 right-0 z-50 items-center justify-center overflow-x-hidden overflow-y-auto top-4 md:inset-0 h-modal sm:h-full flex"
         id="category-modal">
         <div className="relative w-full h-full max-w-2xl px-4 md:h-auto">
-            <div className="relative bg-white rounded-lg shadow dark:bg-gray-800">
-                <div className="flex items-start justify-between p-5 border-b rounded-t dark:border-gray-700">
-                    <h3 className="text-xl font-semibold dark:text-white">
+            <div className="relative bg-white rounded-lg shadow">
+                <div className="flex items-start justify-between p-5 border-b rounded-t">
+                    <h3 className="text-xl font-semibold">
                         Edit category
                     </h3>
                     <button type="button"
-                        className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700"
+                        className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"
                         data-modal-toggle="category-modal">
                         <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
@@ -23,18 +23,18 @@ export default function EditCategory() {
                         <div className="grid grid-cols-6 gap-6">
                             <div className="col-span-6 sm:col-span-6">
                                 <label forhtml="category-name"
-                                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category
+                                    className="block mb-2 text-sm font-medium text-gray-900">Category
                                     Name</label>
                                 <input type="text" name="category-name" id="category-name"
-                                    className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                    className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                     placeholder="Bags" required />
                             </div>
                         </div>
                     </form>
                 </div>
-                <div className="p-6 border-t border-gray-200 rounded-b dark:border-gray-700">
+                <div className="p-6 border-t border-gray-200 rounded-b">
                     <button
-                        className="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                        className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                         type="submit">Save all</button>
                 </div>
             </div>

@@ -5,25 +5,7 @@ function useFetch(url, method, headers, body) {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     if (!body) {
-      fetch(url, {
-        method,
-        headers: {
-          ...headers,
-        },
-        body: body ? JSON.stringify(body) : null,
-      })
-        .then((response) => {
-          return response.json();
-        })
-        .then((resp) => {
-          setData(resp);
-        })
-        .catch((error) => {
-          console.log(error);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
+      fetching()
     }
   }, []);
 
