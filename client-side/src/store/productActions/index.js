@@ -20,7 +20,10 @@ export function productsFetch() {
     dispatch(setLoading("product"));
     return fetching(`${baseUrl}/product`)
       .then((resp) => {
-        if (resp?.error?.message) return resp;
+        if (resp?.error?.message) {
+          dispatch(setLoading(false));
+          return resp;
+        }
         dispatch(setProducts(resp));
       })
       .finally(() => {
@@ -35,7 +38,10 @@ export function getProductByCategory(name) {
     dispatch(setLoading("product"));
     return fetching(`${baseUrl}/category/product?name=${name}`)
       .then((resp) => {
-        if (resp?.error?.message) return resp;
+        if (resp?.error?.message) {
+          dispatch(setLoading(false));
+          return resp;
+        }
         dispatch(setProducts(resp));
       })
       .finally(() => {

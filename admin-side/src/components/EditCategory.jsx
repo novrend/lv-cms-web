@@ -3,7 +3,7 @@ import Backdrop from "./Backdrop";
 import { useSelector } from "react-redux";
 import ButtonSpinner from "./ButtonSpinner"
 export default function EditCategory(props) {
-    const [category, setCategory] = useState({ ...props.category })
+    const [category, setCategory] = useState({ id: props.category.id, name: props.category.name })
 
     const { loading } = useSelector((state) => {
         return state.productReducer
@@ -11,7 +11,7 @@ export default function EditCategory(props) {
 
     function editHandler(e) {
         e.preventDefault()
-        props.switch()
+        props.switch(category)
     }
 
     const onChangeHandler = (e) => {

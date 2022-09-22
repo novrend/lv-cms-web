@@ -26,7 +26,7 @@ export default function Login() {
             .catch(error => {
                 trigger('Error', error.message)
             })
-            .finnaly(() => {
+            .finally(() => {
                 setLoading(false)
             })
     }

@@ -136,35 +136,21 @@ class productController {
   }
 
   static async deleteProduct(req, res, next) {
-    const t = await sequelize.transaction();
     try {
       const { id } = req.params;
       const findProduct = await Product.findByPk(id);
       if (!findProduct) {
         throw { code: 404, msg: "Product not found" };
       }
-      await Product.destroy(
-        {
-          where: {
-            id,
-          },
+      await Product.destroy({
+        where: {
+          id,
         },
-        { transaction: t }
-      );
-      await Image.delete(
-        {
-          where: {
-            productId: id,
-          },
-        },
-        { transaction: t }
-      );
-      await t.commit();
+      });
       res.status(200).json({
         message: `Product ID ${id} deleted`,
       });
     } catch (error) {
-      await t.rollback();
       next(error);
     }
   }

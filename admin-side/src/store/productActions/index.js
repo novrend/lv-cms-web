@@ -20,7 +20,9 @@ export function productsFetch() {
     dispatch(setLoading("fetch"));
     return fetching(`${baseUrl}/product`)
       .then((resp) => {
-        if (resp?.error?.message) return resp;
+        if (resp?.error?.message) {
+          dispatch(setLoading(false));
+        }
         dispatch(setProducts(resp));
       })
       .finally(() => {
@@ -42,9 +44,15 @@ export function addProduct(payload) {
       payload
     )
       .then((resp) => {
-        if (resp?.error) return resp;
+        if (resp?.error) {
+          dispatch(setLoading(false));
+          return resp;
+        }
         dispatch(productsFetch()).then((resp) => {
-          if (resp?.error) return resp;
+          if (resp?.error) {
+          dispatch(setLoading(false));
+          return resp;
+        }
         });
       })
       .finally(() => {
@@ -66,9 +74,15 @@ export function productEdit(data) {
       data
     )
       .then((resp) => {
-        if (resp?.error) return resp;
+        if (resp?.error) {
+          dispatch(setLoading(false));
+          return resp;
+        }
         dispatch(productsFetch()).then((resp) => {
-          if (resp?.error) return resp;
+          if (resp?.error) {
+          dispatch(setLoading(false));
+          return resp;
+        }
         });
       })
       .finally(() => {
@@ -84,9 +98,15 @@ export function productDelete(id) {
       access_token: localStorage.getItem("access_token"),
     })
       .then((resp) => {
-        if (resp?.error) return resp;
+        if (resp?.error) {
+          dispatch(setLoading(false));
+          return resp;
+        }
         dispatch(productsFetch()).then((resp) => {
-          if (resp?.error) return resp;
+          if (resp?.error) {
+          dispatch(setLoading(false));
+          return resp;
+        }
         });
       })
       .finally(() => {

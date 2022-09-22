@@ -23,6 +23,13 @@ export default function RegisterAdmin() {
                 if (resp?.error) throw resp
                 setUser(resp);
                 trigger('Check', "Admin registration success")
+                setUser({
+                    username: '',
+                    email: '',
+                    password: '',
+                    phoneNumber: '',
+                    address: ''
+                })
             })
             .catch(error => {
                 trigger('Error', error.message)

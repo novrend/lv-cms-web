@@ -31,7 +31,7 @@ export default function ModalConfirmation(props) {
                                     d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
                             <h3 className="mt-5 mb-6 text-xl font-normal text-gray-500">Are you sure
-                                you want to delete this product?</h3>
+                                you want to {props?.text ? props.text : `delete this item`}?</h3>
                             {loading === 'delete' && <ButtonSpinner color="red" />}
                             {!loading && <button
                                 type="button"

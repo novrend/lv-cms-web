@@ -20,7 +20,10 @@ export function categoriesFetch() {
     dispatch(setLoading("fetch"));
     return fetching(`${baseUrl}/category`)
       .then((resp) => {
-        if (resp?.error) return resp;
+        if (resp?.error) {
+          dispatch(setLoading(false));
+          return resp;
+        }
         dispatch(setCategories(resp));
       })
       .finally(() => {
@@ -42,9 +45,15 @@ export function addCategory(payload) {
       payload
     )
       .then((resp) => {
-        if (resp?.error) return resp;
+        if (resp?.error) {
+          dispatch(setLoading(false));
+          return resp;
+        }
         dispatch(categoriesFetch()).then((resp) => {
-          if (resp?.error) return resp;
+          if (resp?.error) {
+            dispatch(setLoading(false));
+            return resp;
+          }
         });
       })
       .finally(() => {
@@ -63,12 +72,18 @@ export function categoryEdit(data) {
         access_token: localStorage.getItem("access_token"),
         "Content-Type": "application/json",
       },
-      data
+      { name: data.name }
     )
       .then((resp) => {
-        if (resp?.error) return resp;
+        if (resp?.error) {
+          dispatch(setLoading(false));
+          return resp;
+        }
         dispatch(categoriesFetch()).then((resp) => {
-          if (resp?.error) return resp;
+          if (resp?.error) {
+            dispatch(setLoading(false));
+            return resp;
+          }
         });
       })
       .finally(() => {
@@ -84,9 +99,15 @@ export function categoryDelete(id) {
       access_token: localStorage.getItem("access_token"),
     })
       .then((resp) => {
-        if (resp?.error) return resp;
+        if (resp?.error) {
+          dispatch(setLoading(false));
+          return resp;
+        }
         dispatch(categoriesFetch()).then((resp) => {
-          if (resp?.error) return resp;
+          if (resp?.error) {
+            dispatch(setLoading(false));
+            return resp;
+          }
         });
       })
       .finally(() => {

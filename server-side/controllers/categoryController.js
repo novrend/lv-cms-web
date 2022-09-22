@@ -76,7 +76,7 @@ class categoryController {
           name,
         },
         {
-          where: id,
+          where: { id },
         }
       );
       res.status(201).json(category);

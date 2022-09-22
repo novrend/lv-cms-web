@@ -57,7 +57,7 @@ export default function Category() {
         dispatch(addCategory(data))
             .then((resp) => {
                 if (resp?.error) throw resp
-                switchEditModal()
+                addClickHandler()
                 trigger('Check', "Category added successfully")
             })
             .catch(error => {
@@ -111,9 +111,9 @@ export default function Category() {
     return (
         <section>
             <Toast type={toast[0]} show={show} text={toast[1]} />
-            {addClicked && <AddCategory clicked={addClickHandler} trigger={trigger} />}
+            {addClicked && <AddCategory clicked={addClickHandler} switch={addCategoryHandler} trigger={trigger} />}
             {editClicked && <EditCategory switch={editCategory} category={category} trigger={trigger} />}
-            {deleteClicked && <ModalConfirmation switch={addCategoryHandler} clicked={deleteClickHandler} confirmed={deleteHandler} />}
+            {deleteClicked && <ModalConfirmation clicked={deleteClickHandler} confirmed={deleteHandler} />}
             <div
                 className="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5">
                 <div className="w-full mb-1">

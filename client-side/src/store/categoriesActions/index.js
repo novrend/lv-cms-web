@@ -20,7 +20,10 @@ export function categoriesFetch() {
     dispatch(setLoading("category"));
     return fetching(`${baseUrl}/category`)
       .then((resp) => {
-        if (resp?.error?.message) return resp;
+        if (resp?.error?.message) {
+          dispatch(setLoading(false));
+          return resp;
+        }
         dispatch(setCategories(resp));
       })
       .finally(() => {

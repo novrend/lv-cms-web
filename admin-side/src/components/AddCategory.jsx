@@ -13,7 +13,7 @@ export default function AddCategory(props) {
 
     const submitHandler = (e) => {
         e.preventDefault()
-        props.switch()
+        props.switch(category)
     }
 
     const onChangeHandler = (e) => {
