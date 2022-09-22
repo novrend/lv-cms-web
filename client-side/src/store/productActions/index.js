@@ -1,4 +1,4 @@
-import { SET_PRODUCTS } from "../actionTypes";
+import { SET_LOADING, SET_PRODUCTS } from "../actionTypes";
 import { fetching } from "../../helpers";
 import { baseUrl } from "../../config/config";
 function setProducts(resp) {
@@ -7,19 +7,39 @@ function setProducts(resp) {
     data: resp,
   };
 }
+function setLoading(data) {
+  return {
+    type: SET_LOADING,
+    data,
+  };
+}
 
 export function productsFetch() {
   return (dispatch, getState) => {
-    fetching(`${baseUrl}/product`).then((resp) => {
-      dispatch(setProducts(resp));
-    });
+    dispatch(setProducts([]));
+    dispatch(setLoading("product"));
+    return fetching(`${baseUrl}/product`)
+      .then((resp) => {
+        if (resp?.error?.message) return resp;
+        dispatch(setProducts(resp));
+      })
+      .finally(() => {
+        dispatch(setLoading(false));
+      });
   };
 }
 
 export function getProductByCategory(name) {
   return (dispatch, getState) => {
-    fetching(`${baseUrl}/category/product?name=${name}`).then((resp) => {
-      dispatch(setProducts(resp));
-    });
+    dispatch(setProducts([]));
+    dispatch(setLoading("product"));
+    return fetching(`${baseUrl}/category/product?name=${name}`)
+      .then((resp) => {
+        if (resp?.error?.message) return resp;
+        dispatch(setProducts(resp));
+      })
+      .finally(() => {
+        dispatch(setLoading(false));
+      });
   };
 }

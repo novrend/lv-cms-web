@@ -2,18 +2,40 @@ import { NavLink, Outlet, Link } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux'
 import { categoriesFetch } from "../store/categoriesActions";
 import { useEffect } from "react";
+import { Toast } from "../components/Toast"
 export default function Navbar() {
     const { categories } = useSelector((state) => {
         return state.categoryReducer
     })
-
+    const [show, setShow] = useState(false)
+    const [toast, setToast] = useState([0, 0])
     const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(categoriesFetch())
+            .then((resp) => {
+                if (resp?.error) throw resp
+            })
+            .catch(error => {
+                trigger('Error', error.message)
+            })
     }, []);
+    let counter = 0
+    function trigger(type, text) {
+        setToast([type, text])
+        setShow(true);
+        counter = 3
+        timeout();
+    }
+    function timeout() {
+        if (--counter > 0) {
+            return setTimeout(timeout, 1000);
+        }
+        setShow(false);
+    }
     return (
         <section>
+            <Toast type={toast[0]} show={show} text={toast[1]} />
             <nav className="bg-white border-gray-200">
                 <div className="grid grid-cols-3 items-center mx-auto max-w-screen-xl px-4 md:px-6 py-2.5">
                     <div className="justify-start items-center">

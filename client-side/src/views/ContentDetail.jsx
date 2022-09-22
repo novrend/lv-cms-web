@@ -1,3 +1,4 @@
+import { Toast } from "../components/Toast"
 import { useState } from "react"
 import { useEffect } from "react"
 import { useParams } from "react-router-dom"
@@ -5,16 +6,36 @@ import { baseUrl } from "../config/config"
 import { fetching } from "../helpers"
 
 export default function ContentDetail() {
+    const [show, setShow] = useState(false)
+    const [toast, setToast] = useState([0, 0])
     const [product, setProduct] = useState({})
     const { id } = useParams()
     useEffect(() => {
         fetching(`${baseUrl}/product/${id}`)
             .then((resp) => {
+                if (resp?.error) throw resp
                 setProduct(resp)
             })
+            .catch(error => {
+                trigger('Error', error.message)
+            })
     }, [])
+    let counter = 0
+    function trigger(type, text) {
+        setToast([type, text])
+        setShow(true);
+        counter = 3
+        timeout();
+    }
+    function timeout() {
+        if (--counter > 0) {
+            return setTimeout(timeout, 1000);
+        }
+        setShow(false);
+    }
     return (
         <div className="bg-stone-100 grid grid-cols-2 gap-8 w-full items-center">
+            <Toast type={toast[0]} show={show} text={toast[1]} />
             <div>
                 <img src={product.mainImg} />
             </div>

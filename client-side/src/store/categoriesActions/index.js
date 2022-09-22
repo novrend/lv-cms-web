@@ -1,4 +1,4 @@
-import { SET_CATEGORIES } from "../actionTypes";
+import { SET_LOADING, SET_CATEGORIES } from "../actionTypes";
 import { fetching } from "../../helpers";
 import { baseUrl } from "../../config/config";
 function setCategories(resp) {
@@ -7,11 +7,24 @@ function setCategories(resp) {
     data: resp,
   };
 }
+function setLoading(data) {
+  return {
+    type: SET_LOADING,
+    data,
+  };
+}
 
 export function categoriesFetch() {
   return (dispatch, getState) => {
-    fetching(`${baseUrl}/category`).then((resp) => {
-      dispatch(setCategories(resp));
-    });
+    dispatch(setCategories([]));
+    dispatch(setLoading("category"));
+    return fetching(`${baseUrl}/category`)
+      .then((resp) => {
+        if (resp?.error?.message) return resp;
+        dispatch(setCategories(resp));
+      })
+      .finally(() => {
+        dispatch(setLoading(false));
+      });
   };
 }

@@ -2,6 +2,7 @@ import { SET_PRODUCTS } from "../actionTypes";
 
 const initialState = {
   products: [],
+  loading: true,
 };
 
 function productReducer(state = initialState, action) {
@@ -10,6 +11,11 @@ function productReducer(state = initialState, action) {
       return {
         ...state,
         products: action.data,
+      };
+    case SET_LOADING:
+      return {
+        ...state,
+        loading: action.data,
       };
     default:
       return state;

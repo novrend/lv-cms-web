@@ -2,6 +2,7 @@ import { Carousel } from 'flowbite-react'
 import { useEffect } from 'react';
 import { Link, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux'
+import { Toast } from "../components/Toast"
 import { getProductByCategory, productsFetch } from '../store/productActions'
 export default function Content() {
     const dispatch = useDispatch()
@@ -9,16 +10,43 @@ export default function Content() {
     const { products } = useSelector((state) => {
         return state.productReducer
     })
-
+    const [show, setShow] = useState(false)
+    const [toast, setToast] = useState([0, 0])
     useEffect(() => {
         if (category) {
             dispatch(getProductByCategory(category))
+                .then((resp) => {
+                    if (resp?.error) throw resp
+                })
+                .catch(error => {
+                    trigger('Error', error.message)
+                })
         } else {
             dispatch(productsFetch())
+                .then((resp) => {
+                    if (resp?.error) throw resp
+                })
+                .catch(error => {
+                    trigger('Error', error.message)
+                })
         }
     }, [category]);
+    let counter = 0
+    function trigger(type, text) {
+        setToast([type, text])
+        setShow(true);
+        counter = 3
+        timeout();
+    }
+    function timeout() {
+        if (--counter > 0) {
+            return setTimeout(timeout, 1000);
+        }
+        setShow(false);
+    }
     return (
         <div className="grid grid-cols-3 gap-8 p-10 w-full">
+            <Toast type={toast[0]} show={show} text={toast[1]} />
             {products.map(product => {
                 return (
                     <div className="group" key={product.id}>
