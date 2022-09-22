@@ -1,4 +1,4 @@
-import { SET_CATEGORIES } from "../actionTypes";
+import { SET_LOADING, SET_CATEGORIES } from "../actionTypes";
 
 const initialState = {
   categories: [],

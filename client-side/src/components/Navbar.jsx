@@ -1,10 +1,11 @@
 import { NavLink, Outlet, Link } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux'
 import { categoriesFetch } from "../store/categoriesActions";
-import { useEffect } from "react";
-import { Toast } from "../components/Toast"
+import { useEffect, useState } from "react";
+import Toast from "./Toast"
+import NavbarSkeleton from "./NavbarSkeleton";
 export default function Navbar() {
-    const { categories } = useSelector((state) => {
+    const { categories, loading } = useSelector((state) => {
         return state.categoryReducer
     })
     const [show, setShow] = useState(false)
@@ -102,7 +103,8 @@ export default function Navbar() {
             </nav>
             <nav className="border-b border-gray-200">
                 <div className="py-3 px-4 mx-auto max-w-screen-xl md:px-6">
-                    <ul className="flex flex-wrap justify-center mt-0 space-x-8 text-lg font-medium">
+                    {loading === 'category' && <NavbarSkeleton />}
+                    {!loading && <ul className="flex flex-wrap justify-center mt-0 space-x-8 text-lg font-medium">
                         <li>
                             <NavLink to="/" className={({ isActive }) => `text-gray-900 ${isActive ? 'underline underline-offset-[19px]' : 'hover:underline hover:underline-offset-[19px]'}`}
                                 aria-current="page" end>Home</NavLink>
@@ -114,7 +116,7 @@ export default function Navbar() {
                                 </li>
                             )
                         })}
-                    </ul>
+                    </ul>}
                 </div>
             </nav>
             <Outlet />

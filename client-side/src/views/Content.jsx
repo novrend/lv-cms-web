@@ -1,13 +1,14 @@
 import { Carousel } from 'flowbite-react'
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux'
-import { Toast } from "../components/Toast"
+import Toast from "../components/Toast"
 import { getProductByCategory, productsFetch } from '../store/productActions'
+import ContentSkeleton from '../components/ContentSkeleton';
 export default function Content() {
     const dispatch = useDispatch()
     const { category } = useParams()
-    const { products } = useSelector((state) => {
+    const { products, loading } = useSelector((state) => {
         return state.productReducer
     })
     const [show, setShow] = useState(false)
@@ -46,10 +47,11 @@ export default function Content() {
     }
     return (
         <div className="grid grid-cols-3 gap-8 p-10 w-full">
+            {loading === 'product' && <ContentSkeleton />}
             <Toast type={toast[0]} show={show} text={toast[1]} />
             {products.map(product => {
                 return (
-                    <div className="group" key={product.id}>
+                    !loading && (<div className="group" key={product.id}>
                         <div className="h-[442px]">
                             <Carousel indicators={false} slide={false} leftControl={
                                 <div className="transition opacity-0	group-hover:opacity-100 duration-300 absolute top-0 left-0 z-30 flex items-center justify-center h-full cursor-pointer group focus:outline-none">
@@ -82,7 +84,7 @@ export default function Content() {
                                 {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(product.price)}
                             </div>
                         </div>
-                    </div>
+                    </div>)
                 )
             })}
         </div >

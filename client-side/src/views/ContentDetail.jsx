@@ -1,16 +1,18 @@
-import { Toast } from "../components/Toast"
-import { useState } from "react"
-import { useEffect } from "react"
+import Toast from "../components/Toast"
+import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { baseUrl } from "../config/config"
 import { fetching } from "../helpers"
+import ContentDetailSkeleton from "../components/ContentDetailSkeleton"
 
 export default function ContentDetail() {
     const [show, setShow] = useState(false)
     const [toast, setToast] = useState([0, 0])
     const [product, setProduct] = useState({})
+    const [loading, setLoading] = useState(false)
     const { id } = useParams()
     useEffect(() => {
+        setLoading(true)
         fetching(`${baseUrl}/product/${id}`)
             .then((resp) => {
                 if (resp?.error) throw resp
@@ -18,6 +20,9 @@ export default function ContentDetail() {
             })
             .catch(error => {
                 trigger('Error', error.message)
+            })
+            .finally(() => {
+                setLoading(false)
             })
     }, [])
     let counter = 0
@@ -34,6 +39,8 @@ export default function ContentDetail() {
         setShow(false);
     }
     return (
+        loading && <ContentDetailSkeleton /> ||
+        !loading &&
         <div className="bg-stone-100 grid grid-cols-2 gap-8 w-full items-center">
             <Toast type={toast[0]} show={show} text={toast[1]} />
             <div>

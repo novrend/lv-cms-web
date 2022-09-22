@@ -5,7 +5,7 @@ export default function SkeletonDashboard() {
     return (
         loop.map(el => {
             return (
-                <tr className="hover:bg-gray-100" key={el}>
+                <tr className="hover:bg-gray-100 animate-pulse" key={el}>
                     <td className="p-4 text-base text-gray-900 whitespace-nowrap">
                         <div className="h-6 bg-gray-300 rounded-full w-6"></div>
                     </td>
