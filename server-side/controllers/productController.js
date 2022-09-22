@@ -5,7 +5,7 @@ class productController {
     try {
       const products = await Product.findAll({
         include: [
-          { model: User, attributes: { exclude: ["password"] } },
+          { model: User, attributes: ["email"] },
           { model: Image },
           { model: Category },
         ],
@@ -24,7 +24,7 @@ class productController {
           id,
         },
         include: [
-          { model: User, attributes: { exclude: ["password"] } },
+          { model: User, attributes: ["email"] },
           { model: Image },
           { model: Category },
         ],
@@ -39,6 +39,7 @@ class productController {
   }
 
   static async addProduct(req, res, next) {
+    const t = await sequelize.transaction();
     try {
       const { name, description, price, mainImg, image1, image2, categoryId } =
         req.body;
@@ -47,7 +48,6 @@ class productController {
         throw { code: 404, msg: "Category not found" };
       }
 
-      const t = await sequelize.transaction();
       const product = await Product.create(
         {
           name,
@@ -81,6 +81,7 @@ class productController {
   }
 
   static async editProduct(req, res, next) {
+    const t = await sequelize.transaction();
     try {
       const {
         name,
@@ -99,7 +100,6 @@ class productController {
         throw { code: 404, msg: "Category not found" };
       }
 
-      const t = await sequelize.transaction();
       const product = await Product.update(
         {
           name,
@@ -136,13 +136,13 @@ class productController {
   }
 
   static async deleteProduct(req, res, next) {
+    const t = await sequelize.transaction();
     try {
       const { id } = req.params;
       const findProduct = await Product.findByPk(id);
       if (!findProduct) {
         throw { code: 404, msg: "Product not found" };
       }
-      const t = await sequelize.transaction();
       await Product.destroy(
         {
           where: {

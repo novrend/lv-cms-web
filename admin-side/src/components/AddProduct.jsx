@@ -10,8 +10,8 @@ export default function AddProduct(props) {
         price: '',
         description: '',
         mainImg: '',
-        Image1: '',
-        Image2: '',
+        image1: '',
+        image2: '',
     })
 
     const { loading } = useSelector((state) => {
@@ -22,7 +22,6 @@ export default function AddProduct(props) {
 
     const submitHandler = (e) => {
         e.preventDefault()
-        setProduct({ ...product, Images: [{ id: '1', imgUrl: product.Image1 }, { id: '2', imgUrl: product.Image2 }] })
         dispatch(addProduct(product))
             .then(() => {
                 props.clicked()
@@ -119,19 +118,19 @@ export default function AddProduct(props) {
                                             placeholder="Main Image" required />
                                     </div>
                                     <div className="col-span-6 sm:col-span-6">
-                                        <label forhtml="image-1"
+                                        <label forhtml="image1"
                                             className="block mb-2 text-sm font-medium text-gray-900">Image Url 1</label>
-                                        <input type="text" name="image-1" id="Image1"
-                                            value={product.Image1}
+                                        <input type="text" name="image1" id="image1"
+                                            value={product.image1}
                                             onChange={onChangeHandler}
                                             className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                             placeholder="Image URL 2" required />
                                     </div>
                                     <div className="col-span-6 sm:col-span-6">
-                                        <label forhtml="image-2"
+                                        <label forhtml="image2"
                                             className="block mb-2 text-sm font-medium text-gray-900">Image Url 2</label>
-                                        <input type="text" name="image-2" id="Image2"
-                                            value={product.Image2}
+                                        <input type="text" name="image2" id="image2"
+                                            value={product.image2}
                                             onChange={onChangeHandler}
                                             className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                             placeholder="Image URL 3" required />

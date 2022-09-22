@@ -4,7 +4,18 @@ import { productEdit } from "../store/productActions";
 import Backdrop from "./Backdrop";
 import ButtonSpinner from "./ButtonSpinner"
 export default function EditProduct(props) {
-    const [product, setProduct] = useState({ ...props.product })
+    const [product, setProduct] = useState({
+        "id": props.product.id,
+        "name": props.product.name,
+        "description": props.product.description,
+        "price": props.product.price,
+        "mainImg": props.product.mainImg,
+        "categoryId": props.product.categoryId,
+        "image1": props?.product?.Images?.[0]?.imgUrl,
+        "image2": props?.product?.Images?.[1]?.imgUrl,
+        "imageId1": props?.product?.Images?.[0]?.id,
+        "imageId2": props?.product?.Images?.[1]?.id
+    })
 
     const dispatch = useDispatch()
 
@@ -14,7 +25,6 @@ export default function EditProduct(props) {
 
     function editHandler(e) {
         e.preventDefault()
-        setProduct({ ...product, Images: [{ id: '1', imgUrl: product.Image1 }, { id: '2', imgUrl: product.Image2 }] })
         dispatch(productEdit(product))
             .then(() => {
                 props.switch()
@@ -107,20 +117,26 @@ export default function EditProduct(props) {
                                                 clipRule="evenodd"></path>
                                         </svg></a>
                                     </div>
-                                    {product?.Images?.map(image => {
-                                        return (
-                                            <div key={image.id}>
-                                                <img src={image.imgUrl} className="h-24" alt="imac image" />
-                                                <a href="#" className="cursor-pointer"><svg className="w-6 h-6 -mt-5 text-red-600"
-                                                    fill="currentColor" viewBox="0 0 20 20"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path fillRule="evenodd"
-                                                        d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
-                                                        clipRule="evenodd"></path>
-                                                </svg></a>
-                                            </div>
-                                        )
-                                    })}
+                                    {product?.image1 && <div>
+                                        <img src={product.image1} className="h-24" alt="imac image" />
+                                        <a href="#" className="cursor-pointer"><svg className="w-6 h-6 -mt-5 text-red-600"
+                                            fill="currentColor" viewBox="0 0 20 20"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path fillRule="evenodd"
+                                                d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                                                clipRule="evenodd"></path>
+                                        </svg></a>
+                                    </div>}
+                                    {product?.image2 && <div>
+                                        <img src={product.image2} className="h-24" alt="imac image" />
+                                        <a href="#" className="cursor-pointer"><svg className="w-6 h-6 -mt-5 text-red-600"
+                                            fill="currentColor" viewBox="0 0 20 20"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path fillRule="evenodd"
+                                                d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                                                clipRule="evenodd"></path>
+                                        </svg></a>
+                                    </div>}
                                 </div>
                                 <div className="grid grid-cols-6 gap-6">
                                     <div className="col-span-6 sm:col-span-6">
@@ -132,20 +148,20 @@ export default function EditProduct(props) {
                                             placeholder="Main Image" value={product.mainImg} required />
                                     </div>
                                     <div className="col-span-6 sm:col-span-6">
-                                        <label forhtml="Image1"
+                                        <label forhtml="image1"
                                             className="block mb-2 text-sm font-medium text-gray-900">Image Url 1</label>
-                                        <input type="text" name="Image1" id="Image1"
+                                        <input type="text" name="image1" id="image1"
                                             onChange={onChangeHandler}
                                             className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                            placeholder="Image URL 2" value={product?.Images?.[0]?.imgUrl || product?.Image1 ? product?.Images?.[0]?.imgUrl || product?.Image1 : ""} required />
+                                            placeholder="Image URL 2" value={product?.image1} required />
                                     </div>
                                     <div className="col-span-6 sm:col-span-6">
-                                        <label forhtml="Image2"
+                                        <label forhtml="image2"
                                             className="block mb-2 text-sm font-medium text-gray-900">Image Url 2</label>
-                                        <input type="text" name="Image2" id="Image2"
+                                        <input type="text" name="image2" id="image2"
                                             onChange={onChangeHandler}
                                             className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                            placeholder="Image URL 3" value={product?.Images?.[1]?.imgUrl || product?.Image2 ? product?.Images?.[1]?.imgUrl || product?.Image2 : ""} required />
+                                            placeholder="Image URL 3" value={product?.image2} required />
                                     </div>
                                 </div>
                             </div>

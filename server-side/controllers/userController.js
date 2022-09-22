@@ -16,7 +16,7 @@ class userController {
           email,
         },
       });
-      if (!user || compareBcrypt(password, user.password)) {
+      if (!user || !compareBcrypt(password, user.password)) {
         throw { code: 401, msg: "Invalid email/password" };
       }
       const access_token = signJWT({

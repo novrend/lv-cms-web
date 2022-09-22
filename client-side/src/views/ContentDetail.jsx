@@ -7,7 +7,7 @@ export default function ContentDetail() {
     const [product, setProduct] = useState({})
     const { id } = useParams()
     useEffect(() => {
-        fetching(`http://localhost:3000/Products/${id}`)
+        fetching(`http://localhost:3000/product/${id}`)
             .then((resp) => {
                 setProduct(resp)
             })

@@ -1,4 +1,4 @@
-const { Category } = require("../models");
+const { Category, Product, Image } = require("../models");
 
 class categoryController {
   static async fetchCategories(req, res, next) {
@@ -27,6 +27,30 @@ class categoryController {
     }
   }
 
+  static async getProductByCategory(req, res, next) {
+    try {
+      const { name } = req.query;
+      const category = await Category.findOne({
+        where: {
+          name,
+        },
+        include: {
+          model: Product,
+          include: {
+            model: Image,
+          },
+        },
+      });
+      if (!category) {
+        throw { code: 404, msg: "Category not found" };
+      }
+      res.status(200).json(category.Products);
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
+  }
+
   static async addCategory(req, res, next) {
     try {
       const { name } = req.body;
@@ -43,7 +67,7 @@ class categoryController {
     try {
       const { name } = req.body;
       const { id } = req.params;
-      const findCategory = await Category.findByPk(categoryId);
+      const findCategory = await Category.findByPk(id);
       if (!findCategory) {
         throw { code: 404, msg: "Category not found" };
       }
@@ -64,7 +88,7 @@ class categoryController {
   static async deleteCategory(req, res, next) {
     try {
       const { id } = req.params;
-      const findCategory = await Category.findByPk(categoryId);
+      const findCategory = await Category.findByPk(id);
       if (!findCategory) {
         throw { code: 404, msg: "Category not found" };
       }

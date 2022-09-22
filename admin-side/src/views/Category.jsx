@@ -15,7 +15,7 @@ export default function Category() {
     const [category, setCategory] = useState({})
     const [show, setShow] = useState(false)
     const [toast, setToast] = useState([0, 0])
-    const { categories } = useSelector((state) => {
+    const { categories, loading } = useSelector((state) => {
         return state.categoryReducer
     })
 
@@ -33,6 +33,7 @@ export default function Category() {
         deleteClicked ? setDeleteClicked(false) : setDeleteClicked(true)
     }
     function deleteHandler() {
+        console.log(choosenId)
         dispatch(categoryDelete(choosenId))
             .then(() => {
                 setDeleteClicked(false)
@@ -43,7 +44,9 @@ export default function Category() {
         editClicked ? setEditClicked(false) : setEditClicked(true)
     }
     function editClickHandler(e) {
-        fetching(`http://localhost:3000/Categories/${e.target.id}`)
+        fetching(`http://localhost:3000/category/${e.target.id}`, 'GET', {
+            access_token: localStorage.getItem("access_token")
+        })
             .then((resp) => {
                 setCategory(resp);
             })

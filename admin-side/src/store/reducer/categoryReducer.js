@@ -1,7 +1,8 @@
-import { ADD_CATEGORY, SET_CATEGORIES } from "../actionTypes";
+import { ADD_CATEGORY, SET_CATEGORIES, SET_LOADING } from "../actionTypes";
 
 const initialState = {
   categories: [],
+  loading: true,
 };
 
 function categoryReducer(state = initialState, action) {
@@ -15,6 +16,11 @@ function categoryReducer(state = initialState, action) {
       return {
         ...state,
         categories: [...state.categories, action.data],
+      };
+    case SET_LOADING:
+      return {
+        ...state,
+        loading: action.data,
       };
     default:
       return state;

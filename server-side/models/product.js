@@ -28,18 +28,7 @@ module.exports = (sequelize, DataTypes) => {
           },
         },
       },
-      slug: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          notNull: {
-            msg: "Slug is required",
-          },
-          notEmpty: {
-            msg: "Slug is required",
-          },
-        },
-      },
+      slug: DataTypes.STRING,
       description: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -90,6 +79,7 @@ module.exports = (sequelize, DataTypes) => {
           product.slug = product.name
             .replaceAll(" ", "-")
             .replace(/[^a-z0-9\-]/gi, "");
+          product.description = product.description.slice(0, 254);
         },
       },
       modelName: "Product",

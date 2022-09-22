@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 export default function Sidebar() {
   const navigate = useNavigate();
   function logoutHander() {
@@ -16,9 +16,10 @@ export default function Sidebar() {
           <div className="flex-1 px-3 space-y-1 bg-white divide-y divide-gray-200">
             <ul className="pb-2 space-y-2">
               <li>
-                <Link
+                <NavLink
                   to="/"
-                  className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-gray-100 group"
+                  className={({ isActive }) => `flex items-center p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-gray-100 group ${isActive ? 'bg-gray-100' : ''}`}
+                  end
                 >
                   <svg
                     className="w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900"
@@ -31,13 +32,13 @@ export default function Sidebar() {
                   <span className="ml-3">
                     Dashboard
                   </span>
-                </Link>
+                </NavLink>
               </li>
 
               <li>
-                <Link
+                <NavLink
                   to="/categories"
-                  className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-gray-100 group"
+                  className={({ isActive }) => `flex items-center p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-gray-100 group ${isActive ? 'bg-gray-100' : ''}`}
                 >
                   <svg
                     className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900"
@@ -54,13 +55,13 @@ export default function Sidebar() {
                   <span className="ml-3">
                     Categories
                   </span>
-                </Link>
+                </NavLink>
               </li>
             </ul>
             <div className="pt-2 space-y-2">
-              <Link
+              <NavLink
                 to="/register"
-                className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg transition duration-75 hover:bg-gray-100 group"
+                className={({ isActive }) => `flex items-center p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-gray-100 group ${isActive ? 'bg-gray-100' : ''}`}
               >
                 <svg
                   className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900"
@@ -73,7 +74,7 @@ export default function Sidebar() {
                 <span className="ml-3">
                   Register Admin
                 </span>
-              </Link>
+              </NavLink>
               <button
                 onClick={logoutHander}
                 type="button"

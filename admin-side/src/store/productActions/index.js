@@ -15,11 +15,12 @@ function setLoading(data) {
 
 export function addProduct(payload) {
   return (dispatch, getState) => {
-    dispatch(setLoading('add'));
+    dispatch(setLoading("add"));
     return fetching(
-      "http://localhost:3000/Products",
+      "http://localhost:3000/product",
       "POST",
       {
+        access_token: localStorage.getItem("access_token"),
         "Content-Type": "application/json",
       },
       payload
@@ -38,8 +39,8 @@ export function addProduct(payload) {
 
 export function productsFetch() {
   return (dispatch, getState) => {
-    dispatch(setLoading('fetch'));
-    fetching("http://localhost:3000/Products")
+    dispatch(setLoading("fetch"));
+    fetching("http://localhost:3000/product")
       .then((resp) => {
         dispatch(setProducts(resp));
       })
@@ -53,9 +54,10 @@ export function productEdit(data) {
   return (dispatch, getState) => {
     dispatch(setLoading(true));
     return fetching(
-      `http://localhost:3000/Products/${data.id}`,
+      `http://localhost:3000/product/${data.id}`,
       "PUT",
       {
+        access_token: localStorage.getItem("access_token"),
         "Content-Type": "application/json",
       },
       data
@@ -79,8 +81,10 @@ export function productEdit(data) {
 
 export function productDelete(id) {
   return (dispatch, getState) => {
-    dispatch(setLoading('delete'));
-    return fetching(`http://localhost:3000/Products/${id}`, "DELETE")
+    dispatch(setLoading("delete"));
+    return fetching(`http://localhost:3000/product/${id}`, "DELETE", {
+      access_token: localStorage.getItem("access_token"),
+    })
       .then((resp) => {
         let state = getState();
         state = state.productReducer.products.filter(

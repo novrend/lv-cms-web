@@ -5,9 +5,10 @@ import {
 } from "redux";
 import thunk from "redux-thunk";
 import productReducer from "./reducer/productReducer";
+import categoryReducer from "./reducer/categoryReducer";
 
 const rootReducer = combineReducers({
-  productReducer,
+  productReducer, categoryReducer
 });
 
 let store = createStore(rootReducer, applyMiddleware(thunk));

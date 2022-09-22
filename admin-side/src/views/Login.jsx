@@ -4,15 +4,15 @@ import { useNavigate, Navigate } from 'react-router-dom'
 export default function Login() {
     const navigate = useNavigate();
     const [user, setUser] = useState({
-        username: '',
+        email: '',
         password: ''
     })
 
     const handleLogin = (e) => {
         e.preventDefault()
-        fetching("http://localhost:3000/Users", "POST", { "Content-Type": "application/json" }, user)
+        fetching("http://localhost:3000/user/login", "POST", { "Content-Type": "application/json" }, user)
             .then((resp) => {
-                localStorage.setItem('access_token', 'test')
+                localStorage.setItem('access_token', resp.access_token)
                 navigate('/')
             })
     }
@@ -38,8 +38,8 @@ export default function Login() {
                         </h1>
                         <form className="space-y-4 md:space-y-6" onSubmit={handleLogin}>
                             <div>
-                                <label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-900">Your username</label>
-                                <input value={user.username} onChange={onChangeHandler} type="text" name="username" id="username" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" placeholder="johndoe" required="" />
+                                <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900">Your email</label>
+                                <input value={user.email} onChange={onChangeHandler} type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" placeholder="johndoe@mail.com" required="" />
                             </div>
                             <div>
                                 <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900">Password</label>

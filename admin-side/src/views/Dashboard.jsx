@@ -57,7 +57,9 @@ export default function Dashboard() {
     }
     function editClickHandler(e) {
         setEditLoading(e.target.id);
-        fetching(`http://localhost:3000/Products/${e.target.id}`)
+        fetching(`http://localhost:3000/product/${e.target.id}`, 'GET', {
+            access_token: localStorage.getItem("access_token")
+        })
             .then((resp) => {
                 setProduct(resp);
             })
@@ -160,13 +162,13 @@ export default function Dashboard() {
                                                 </td>
                                                 <td
                                                     className="p-4 text-base text-gray-900 whitespace-nowrap">
-                                                    {product.categoryId}</td>
+                                                    {product.Category.name}</td>
                                                 <td
                                                     className="p-4 text-base text-gray-900 whitespace-nowrap">
                                                     {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(product.price)}</td>
                                                 <td
                                                     className="p-4 text-base text-gray-900 whitespace-nowrap">
-                                                    {product.authorId}</td>
+                                                    {product.User.email}</td>
                                                 <td className="p-4 space-x-2 whitespace-nowrap">
                                                     <button type="button" data-modal-toggle="product-modal"
                                                         className="inline-flex items-center px-3 py-2 text-sm text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300">

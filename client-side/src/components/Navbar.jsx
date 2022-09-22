@@ -1,6 +1,17 @@
-import { Outlet } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { NavLink, Outlet, Link } from "react-router-dom";
+import { useSelector, useDispatch } from 'react-redux'
+import { categoriesFetch } from "../store/categoriesActions";
+import { useEffect } from "react";
 export default function Navbar() {
+    const { categories } = useSelector((state) => {
+        return state.categoryReducer
+    })
+
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(categoriesFetch())
+    }, []);
     return (
         <section>
             <nav className="bg-white border-gray-200">
@@ -71,18 +82,16 @@ export default function Navbar() {
                 <div className="py-3 px-4 mx-auto max-w-screen-xl md:px-6">
                     <ul className="flex flex-wrap justify-center mt-0 space-x-8 text-lg font-medium">
                         <li>
-                            <Link to="/" className="text-gray-900 hover:underline hover:underline-offset-[19px]"
-                                aria-current="page">Home</Link>
+                            <NavLink to="/" className={({ isActive }) => `text-gray-900 ${isActive ? 'underline underline-offset-[19px]' : 'hover:underline hover:underline-offset-[19px]'}`}
+                                aria-current="page" end>Home</NavLink>
                         </li>
-                        <li>
-                            <a href="#" className="text-gray-900 hover:underline hover:underline-offset-[19px]">New</a>
-                        </li>
-                        <li>
-                            <a href="#" className="text-gray-900 hover:underline hover:underline-offset-[19px]">Men</a>
-                        </li>
-                        <li>
-                            <a href="#" className="text-gray-900 hover:underline hover:underline-offset-[19px]">Women</a>
-                        </li>
+                        {categories.map(category => {
+                            return (
+                                <li>
+                                    <NavLink key={category.id} to={`${category.name}`} className={({ isActive }) => `text-gray-900 ${isActive ? 'underline underline-offset-[19px]' : 'hover:underline hover:underline-offset-[19px]'}`}>{category.name}</NavLink>
+                                </li>
+                            )
+                        })}
                     </ul>
                 </div>
             </nav>

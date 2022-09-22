@@ -14,7 +14,7 @@ export default function RegisterAdmin() {
 
     const handleRegister = (e) => {
         e.preventDefault()
-        fetching("http://localhost:3000/Users", "POST", { "Content-Type": "application/json" }, user)
+        fetching("http://localhost:3000/user/register", "POST", { "Content-Type": "application/json" }, user)
             .then((resp) => {
                 setUser(resp);
                 trigger('Check', "Admin registration success")
