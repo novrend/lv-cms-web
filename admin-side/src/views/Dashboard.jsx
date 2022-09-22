@@ -1,4 +1,4 @@
-import { productDelete, productsFetch } from '../store/productActions'
+import { productDelete, productsFetch, productEdit, addProduct } from '../store/productActions'
 import { categoriesFetch } from '../store/categoriesActions'
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
@@ -34,10 +34,22 @@ export default function Dashboard() {
 
     useEffect(() => {
         dispatch(categoriesFetch())
+            .then(resp => {
+                if (resp?.error) throw resp
+            })
+            .catch(error => {
+                trigger('Error', error.message)
+            })
     }, []);
 
     useEffect(() => {
         dispatch(productsFetch())
+            .then((resp) => {
+                if (resp?.error) throw resp
+            })
+            .catch(error => {
+                trigger('Error', error.message)
+            })
     }, []);
 
     function addClickHandler() {
@@ -49,13 +61,39 @@ export default function Dashboard() {
     }
     function deleteHandler() {
         dispatch(productDelete(choosenId))
-            .then(() => {
+            .then((resp) => {
+                if (resp?.error) throw resp
                 trigger('Check', "Product deleted successfully")
                 setDeleteClicked(false)
+            })
+            .catch(error => {
+                trigger('Error', error.message)
             })
     }
     function switchEditModal() {
         editClicked ? setEditClicked(false) : setEditClicked(true)
+    }
+    function addProductHandler(data) {
+        dispatch(addProduct(data))
+            .then((resp) => {
+                if (resp?.error) throw resp
+                addClickHandler()
+                trigger('Check', "Product added successfully")
+            })
+            .catch(error => {
+                trigger('Error', error.message)
+            })
+    }
+    function editProduct(data) {
+        dispatch(productEdit(data))
+            .then((resp) => {
+                if (resp?.error) throw resp
+                switchEditModal()
+                trigger('Check', "Product edited successfully")
+            })
+            .catch(error => {
+                trigger('Error', error.message)
+            })
     }
     function editClickHandler(e) {
         setEditLoading(e.target.id);
@@ -63,11 +101,15 @@ export default function Dashboard() {
             access_token: localStorage.getItem("access_token")
         })
             .then((resp) => {
+                if (resp?.error) throw resp
                 setProduct(resp);
             })
             .then(() => {
                 switchEditModal()
                 setEditLoading(false)
+            })
+            .catch(error => {
+                trigger('Error', error.message)
             })
     }
     let counter = 0
@@ -86,8 +128,8 @@ export default function Dashboard() {
     return (
         <section>
             <Toast type={toast[0]} show={show} text={toast[1]} />
-            {addClicked && <AddProduct clicked={addClickHandler} categories={categories} trigger={trigger} />}
-            {editClicked && <EditProduct clicked={editClickHandler} switch={switchEditModal} product={product} categories={categories} trigger={trigger} />}
+            {addClicked && <AddProduct clicked={addClickHandler} switch={addProductHandler} categories={categories} trigger={trigger} />}
+            {editClicked && <EditProduct clicked={editClickHandler} switch={editProduct} product={product} categories={categories} trigger={trigger} />}
             {deleteClicked && <ModalConfirmation clicked={deleteClickHandler} confirmed={deleteHandler} />}
             <div
                 className="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5">

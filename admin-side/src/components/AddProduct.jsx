@@ -1,7 +1,6 @@
 import Backdrop from "./Backdrop";
 import { useState } from 'react'
-import { addProduct } from "../store/productActions";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import ButtonSpinner from "./ButtonSpinner"
 export default function AddProduct(props) {
     const [product, setProduct] = useState({
@@ -18,15 +17,10 @@ export default function AddProduct(props) {
         return state.productReducer
     })
 
-    const dispatch = useDispatch()
 
     const submitHandler = (e) => {
         e.preventDefault()
-        dispatch(addProduct(product))
-            .then(() => {
-                props.clicked()
-                props.trigger('Check', "Product added successfully")
-            })
+        props.switch(product)
     }
 
     const onChangeHandler = (e) => {

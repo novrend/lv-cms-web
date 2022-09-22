@@ -1,6 +1,4 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { addCategory } from "../store/categoriesActions";
 import Backdrop from "./Backdrop";
 
 export default function AddCategory(props) {
@@ -8,15 +6,9 @@ export default function AddCategory(props) {
         name: '',
     })
 
-    const dispatch = useDispatch()
-
     const submitHandler = (e) => {
         e.preventDefault()
-        dispatch(addCategory(category))
-            .then(() => {
-                props.clicked()
-                props.trigger('Check', "Category added successfully")
-            })
+        props.switch()
     }
 
     const onChangeHandler = (e) => {

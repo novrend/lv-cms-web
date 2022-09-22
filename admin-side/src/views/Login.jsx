@@ -2,19 +2,26 @@ import { useState } from 'react'
 import { fetching } from '../helpers'
 import { useNavigate, Navigate } from 'react-router-dom'
 import { baseUrl } from '../config/config';
+import Toast from '../components/Toast';
 export default function Login() {
     const navigate = useNavigate();
     const [user, setUser] = useState({
         email: '',
         password: ''
     })
+    const [toast, setToast] = useState([0, 0])
+    const [show, setShow] = useState(false)
 
     const handleLogin = (e) => {
         e.preventDefault()
         fetching(`${baseUrl}/user/login`, "POST", { "Content-Type": "application/json" }, user)
             .then((resp) => {
+                if (resp?.error) throw resp
                 localStorage.setItem('access_token', resp.access_token)
                 navigate('/')
+            })
+            .catch(error => {
+                trigger('Error', error.message)
             })
     }
 
@@ -25,12 +32,27 @@ export default function Login() {
         })
     }
 
+    let counter = 0
+    function trigger(type, text) {
+        setToast([type, text])
+        setShow(true);
+        counter = 3
+        timeout();
+    }
+    function timeout() {
+        if (--counter > 0) {
+            return setTimeout(timeout, 1000);
+        }
+        setShow(false);
+    }
+
     if (localStorage.getItem('access_token')) {
         return <Navigate to={"/"} />
     }
 
     return (
         <section className="bg-gray-50">
+            <Toast type={toast[0]} show={show} text={toast[1]} />
             <div className="flex items-center justify-center px-6 py-8 md:h-screen lg:py-0">
                 <div className="w-2/6 bg-white rounded-lg shadow">
                     <div className="p-6 space-y-4 md:space-y-6 sm:p-8">

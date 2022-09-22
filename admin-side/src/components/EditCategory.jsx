@@ -1,21 +1,12 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { categoryEdit } from "../store/categoriesActions";
 import Backdrop from "./Backdrop";
 
 export default function EditCategory(props) {
     const [category, setCategory] = useState({ ...props.category })
 
-    const dispatch = useDispatch()
-
     function editHandler(e) {
         e.preventDefault()
-
-        dispatch(categoryEdit(category))
-            .then(() => {
-                props.switch()
-                props.trigger('Check', "Category edited successfully")
-            })
+        props.switch()
     }
 
     const onChangeHandler = (e) => {

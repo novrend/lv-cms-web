@@ -17,8 +17,12 @@ export default function RegisterAdmin() {
         e.preventDefault()
         fetching(`${baseUrl}/user/register`, "POST", { access_token: localStorage.getItem("access_token"), "Content-Type": "application/json" }, user)
             .then((resp) => {
+                if (resp?.error) throw resp
                 setUser(resp);
                 trigger('Check', "Admin registration success")
+            })
+            .catch(error => {
+                trigger('Error', error.message)
             })
     }
 

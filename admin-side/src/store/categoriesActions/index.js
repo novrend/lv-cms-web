@@ -1,4 +1,4 @@
-import { ADD_CATEGORY, SET_CATEGORIES, SET_LOADING } from "../actionTypes";
+import { SET_CATEGORIES, SET_LOADING } from "../actionTypes";
 import { fetching } from "../../helpers";
 import { baseUrl } from "../../config/config";
 function setCategories(resp) {
@@ -17,8 +17,9 @@ function setLoading(data) {
 export function categoriesFetch() {
   return (dispatch, getState) => {
     dispatch(setLoading("fetch"));
-    fetching(`${baseUrl}/category`)
+    return fetching(`${baseUrl}/category`)
       .then((resp) => {
+        if (resp?.error) return resp;
         dispatch(setCategories(resp));
       })
       .finally(() => {
@@ -40,9 +41,9 @@ export function addCategory(payload) {
       payload
     )
       .then((resp) => {
-        dispatch({
-          type: ADD_CATEGORY,
-          data: resp,
+        if (resp?.error) return resp;
+        dispatch(categoriesFetch()).then((resp) => {
+          if (resp?.error) return resp;
         });
       })
       .finally(() => {
@@ -64,15 +65,10 @@ export function categoryEdit(data) {
       data
     )
       .then((resp) => {
-        let state = getState();
-        state = state.categoryReducer.categories.map((category) => {
-          if (category.id === +data.id) {
-            return data;
-          } else {
-            return category;
-          }
+        if (resp?.error) return resp;
+        dispatch(categoriesFetch()).then((resp) => {
+          if (resp?.error) return resp;
         });
-        dispatch(setCategories(state));
       })
       .finally(() => {
         dispatch(setLoading(false));
@@ -87,11 +83,10 @@ export function categoryDelete(id) {
       access_token: localStorage.getItem("access_token"),
     })
       .then((resp) => {
-        let state = getState();
-        state = state.categoryReducer.categories.filter(
-          (category) => category.id !== +id
-        );
-        dispatch(setCategories(state));
+        if (resp?.error) return resp;
+        dispatch(categoriesFetch()).then((resp) => {
+          if (resp?.error) return resp;
+        });
       })
       .finally(() => {
         dispatch(setLoading(false));

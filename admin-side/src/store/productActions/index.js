@@ -1,4 +1,4 @@
-import { ADD_PRODUCT, SET_LOADING, SET_PRODUCTS } from "../actionTypes";
+import { SET_LOADING, SET_PRODUCTS } from "../actionTypes";
 import { fetching } from "../../helpers";
 import { baseUrl } from "../../config/config";
 function setProducts(resp) {
@@ -27,9 +27,9 @@ export function addProduct(payload) {
       payload
     )
       .then((resp) => {
-        dispatch({
-          type: ADD_PRODUCT,
-          data: resp,
+        if (resp?.error) return resp;
+        dispatch(productsFetch()).then((resp) => {
+          if (resp?.error) return resp;
         });
       })
       .finally(() => {
@@ -41,8 +41,9 @@ export function addProduct(payload) {
 export function productsFetch() {
   return (dispatch, getState) => {
     dispatch(setLoading("fetch"));
-    fetching(`${baseUrl}/product`)
+    return fetching(`${baseUrl}/product`)
       .then((resp) => {
+        if (resp?.error?.message) return resp;
         dispatch(setProducts(resp));
       })
       .finally(() => {
@@ -64,15 +65,10 @@ export function productEdit(data) {
       data
     )
       .then((resp) => {
-        let state = getState();
-        state = state.productReducer.products.map((product) => {
-          if (product.id === +data.id) {
-            return data;
-          } else {
-            return product;
-          }
+        if (resp?.error) return resp;
+        dispatch(productsFetch()).then((resp) => {
+          if (resp?.error) return resp;
         });
-        dispatch(setProducts(state));
       })
       .finally(() => {
         dispatch(setLoading(false));
@@ -87,11 +83,10 @@ export function productDelete(id) {
       access_token: localStorage.getItem("access_token"),
     })
       .then((resp) => {
-        let state = getState();
-        state = state.productReducer.products.filter(
-          (product) => product.id !== +id
-        );
-        dispatch(setProducts(state));
+        if (resp?.error) return resp;
+        dispatch(productsFetch()).then((resp) => {
+          if (resp?.error) return resp;
+        });
       })
       .finally(() => {
         dispatch(setLoading(false));

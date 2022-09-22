@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
-import { categoriesFetch, categoryDelete } from '../store/categoriesActions'
+import { addCategory, categoriesFetch, categoryDelete, categoryEdit } from '../store/categoriesActions'
 import AddCategory from '../components/AddCategory'
 import { useState } from 'react'
 import EditCategory from '../components/EditCategory'
@@ -25,6 +25,12 @@ export default function Category() {
 
     useEffect(() => {
         dispatch(categoriesFetch())
+            .then((resp) => {
+                if (resp?.error) throw resp
+            })
+            .catch(error => {
+                trigger('Error', error.message)
+            })
     }, []);
 
     function addClickHandler() {
@@ -37,9 +43,35 @@ export default function Category() {
     function deleteHandler() {
         console.log(choosenId)
         dispatch(categoryDelete(choosenId))
-            .then(() => {
+            .then((resp) => {
+                if (resp?.error) throw resp
                 setDeleteClicked(false)
                 trigger('Check', "Category deleted successfully")
+            })
+            .catch(error => {
+                trigger('Error', error.message)
+            })
+    }
+    function addCategoryHandler(data) {
+        dispatch(addCategory(data))
+            .then((resp) => {
+                if (resp?.error) throw resp
+                switchEditModal()
+                trigger('Check', "Category added successfully")
+            })
+            .catch(error => {
+                trigger('Error', error.message)
+            })
+    }
+    function editCategory(data) {
+        dispatch(categoryEdit(data))
+            .then((resp) => {
+                if (resp?.error) throw resp
+                switchEditModal()
+                trigger('Check', "Category edited successfully")
+            })
+            .catch(error => {
+                trigger('Error', error.message)
             })
     }
     function switchEditModal() {
@@ -50,10 +82,14 @@ export default function Category() {
             access_token: localStorage.getItem("access_token")
         })
             .then((resp) => {
+                if (resp?.error) throw resp
                 setCategory(resp);
             })
             .then(() => {
                 switchEditModal()
+            })
+            .catch(error => {
+                trigger('Error', error.message)
             })
     }
     let counter = 0
@@ -73,8 +109,8 @@ export default function Category() {
         <section>
             <Toast type={toast[0]} show={show} text={toast[1]} />
             {addClicked && <AddCategory clicked={addClickHandler} trigger={trigger} />}
-            {editClicked && <EditCategory switch={switchEditModal} category={category} trigger={trigger} />}
-            {deleteClicked && <ModalConfirmation clicked={deleteClickHandler} confirmed={deleteHandler} />}
+            {editClicked && <EditCategory switch={editCategory} category={category} trigger={trigger} />}
+            {deleteClicked && <ModalConfirmation switch={addCategoryHandler} clicked={deleteClickHandler} confirmed={deleteHandler} />}
             <div
                 className="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5">
                 <div className="w-full mb-1">

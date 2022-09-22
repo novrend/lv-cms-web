@@ -1,23 +1,22 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { productEdit } from "../store/productActions";
+import { useSelector } from "react-redux";
+
 import Backdrop from "./Backdrop";
 import ButtonSpinner from "./ButtonSpinner"
 export default function EditProduct(props) {
     const [product, setProduct] = useState({
-        "id": props.product.id,
-        "name": props.product.name,
-        "description": props.product.description,
-        "price": props.product.price,
-        "mainImg": props.product.mainImg,
-        "categoryId": props.product.categoryId,
-        "image1": props?.product?.Images?.[0]?.imgUrl,
-        "image2": props?.product?.Images?.[1]?.imgUrl,
-        "imageId1": props?.product?.Images?.[0]?.id,
-        "imageId2": props?.product?.Images?.[1]?.id
+        id: props.product.id,
+        name: props.product.name,
+        description: props.product.description,
+        price: props.product.price,
+        mainImg: props.product.mainImg,
+        categoryId: props.product.categoryId,
+        image1: props?.product?.Images?.[0]?.imgUrl,
+        image2: props?.product?.Images?.[1]?.imgUrl,
+        imageId1: props?.product?.Images?.[0]?.id,
+        imageId2: props?.product?.Images?.[1]?.id
     })
 
-    const dispatch = useDispatch()
 
     const { loading } = useSelector((state) => {
         return state.productReducer
@@ -25,11 +24,7 @@ export default function EditProduct(props) {
 
     function editHandler(e) {
         e.preventDefault()
-        dispatch(productEdit(product))
-            .then(() => {
-                props.switch()
-                props.trigger('Check', "Product edited successfully")
-            })
+        props.switch(product)
     }
 
     const onChangeHandler = (e) => {
@@ -37,6 +32,7 @@ export default function EditProduct(props) {
         setProduct({
             ...product, [name]: e.target.value
         })
+        console.log(product)
     }
     return (
         <section>

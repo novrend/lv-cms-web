@@ -9,8 +9,5 @@ export const fetching = (url, method = "GET", headers = null, body = null) => {
     .then((response) => {
       return response.json();
     })
-    .catch((error) => {
-      console.log(error);
-    });
   return fetching;
 };
