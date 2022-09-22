@@ -1,5 +1,6 @@
 "use strict";
 const data = require("../db.json");
+const { hashBcrypt } = require("../helpers");
 module.exports = {
   async up(queryInterface, Sequelize) {
     /**
@@ -13,6 +14,7 @@ module.exports = {
      */
     data.Users.forEach((el) => {
       delete el.id;
+      el.password = hashBcrypt(el.password);
       el.createdAt = el.updatedAt = new Date();
     });
     await queryInterface.bulkInsert("Users", data.Users, {});
