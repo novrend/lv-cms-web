@@ -1,18 +1,25 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { productEdit } from "../store/productActions";
 import Backdrop from "./Backdrop";
-
+import ButtonSpinner from "./ButtonSpinner"
 export default function EditProduct(props) {
     const [product, setProduct] = useState({ ...props.product })
 
     const dispatch = useDispatch()
 
+    const { loading } = useSelector((state) => {
+        return state.productReducer
+    })
+
     function editHandler(e) {
         e.preventDefault()
         setProduct({ ...product, Images: [{ id: '1', imgUrl: product.Image1 }, { id: '2', imgUrl: product.Image2 }] })
         dispatch(productEdit(product))
-        props.switch()
+            .then(() => {
+                props.switch()
+                props.trigger('Check', "Product edited successfully")
+            })
     }
 
     const onChangeHandler = (e) => {
@@ -143,9 +150,10 @@ export default function EditProduct(props) {
                                 </div>
                             </div>
                             <div className="p-6 border-t border-gray-200 rounded-b">
-                                <button
+                                {loading && <ButtonSpinner color="blue" />}
+                                {!loading && <button
                                     className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-                                    type="submit">Save all</button>
+                                    type="submit">Save all</button>}
                             </div>
                         </div>
                     </form>

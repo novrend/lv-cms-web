@@ -17,7 +17,7 @@ export function categoriesFetch() {
 
 export function addCategory(payload) {
   return (dispatch, getState) => {
-    fetching(
+    return fetching(
       "http://localhost:3000/Categories",
       "POST",
       {
@@ -35,7 +35,7 @@ export function addCategory(payload) {
 
 export function categoryEdit(data) {
   return (dispatch, getState) => {
-    fetching(
+    return fetching(
       `http://localhost:3000/Categories/${data.id}`,
       "PUT",
       {
@@ -58,7 +58,7 @@ export function categoryEdit(data) {
 
 export function categoryDelete(id) {
   return (dispatch, getState) => {
-    fetching(`http://localhost:3000/Categories/${id}`, "DELETE").then(
+    return fetching(`http://localhost:3000/Categories/${id}`, "DELETE").then(
       (resp) => {
         let state = getState();
         state = state.categoryReducer.categories.filter(

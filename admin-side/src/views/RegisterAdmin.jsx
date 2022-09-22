@@ -1,6 +1,9 @@
 import { useState } from 'react'
+import Toast from '../components/Toast'
 import { fetching } from '../helpers'
 export default function RegisterAdmin() {
+    const [show, setShow] = useState(false)
+    const [toast, setToast] = useState([0, 0])
     const [user, setUser] = useState({
         username: '',
         email: '',
@@ -14,6 +17,7 @@ export default function RegisterAdmin() {
         fetching("http://localhost:3000/Users", "POST", { "Content-Type": "application/json" }, user)
             .then((resp) => {
                 setUser(resp);
+                trigger('Check', "Admin registration success")
             })
     }
 
@@ -23,9 +27,22 @@ export default function RegisterAdmin() {
             ...user, [name]: e.target.value
         })
     }
-
+    let counter = 0
+    function trigger(type, text) {
+        setToast([type, text])
+        setShow(true);
+        counter = 3
+        timeout();
+    }
+    function timeout() {
+        if (--counter > 0) {
+            return setTimeout(timeout, 1000);
+        }
+        setShow(false);
+    }
     return (
         <section className="p-6">
+            <Toast type={toast[0]} show={show} text={toast[1]} />
             <div
                 className="block sm:flex items-center border-b border-gray-200 lg:mt-1.5">
                 <div className="w-full mb-1">

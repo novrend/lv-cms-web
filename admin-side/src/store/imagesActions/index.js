@@ -1,8 +1,8 @@
-import { ADD_PRODUCT, SET_LOADING, SET_PRODUCTS } from "../actionTypes";
+import { ADD_IMAGE, SET_LOADING, SET_IMAGES } from "../actionTypes";
 import { fetching } from "../../helpers";
-function setProducts(resp) {
+function setImages(resp) {
   return {
-    type: SET_PRODUCTS,
+    type: SET_IMAGES,
     data: resp,
   };
 }
@@ -13,11 +13,11 @@ function setLoading(data) {
   };
 }
 
-export function addProduct(payload) {
+export function addImage(payload) {
   return (dispatch, getState) => {
-    dispatch(setLoading('add'));
-    return fetching(
-      "http://localhost:3000/Products",
+    dispatch(setLoading(true));
+    fetching(
+      "http://localhost:3000/Images",
       "POST",
       {
         "Content-Type": "application/json",
@@ -26,7 +26,7 @@ export function addProduct(payload) {
     )
       .then((resp) => {
         dispatch({
-          type: ADD_PRODUCT,
+          type: ADD_IMAGE,
           data: resp,
         });
       })
@@ -36,12 +36,12 @@ export function addProduct(payload) {
   };
 }
 
-export function productsFetch() {
+export function imagesFetch() {
   return (dispatch, getState) => {
-    dispatch(setLoading('fetch'));
-    fetching("http://localhost:3000/Products")
+    dispatch(setLoading(true));
+    fetching("http://localhost:3000/Images")
       .then((resp) => {
-        dispatch(setProducts(resp));
+        dispatch(setImages(resp));
       })
       .finally(() => {
         dispatch(setLoading(false));
@@ -49,11 +49,11 @@ export function productsFetch() {
   };
 }
 
-export function productEdit(data) {
+export function imageEdit(data) {
   return (dispatch, getState) => {
     dispatch(setLoading(true));
-    return fetching(
-      `http://localhost:3000/Products/${data.id}`,
+    fetching(
+      `http://localhost:3000/Images/${data.id}`,
       "PUT",
       {
         "Content-Type": "application/json",
@@ -62,14 +62,14 @@ export function productEdit(data) {
     )
       .then((resp) => {
         let state = getState();
-        state = state.productReducer.products.map((product) => {
-          if (product.id === +data.id) {
+        state = state.imageReducer.images.map((image) => {
+          if (image.id === +data.id) {
             return data;
           } else {
-            return product;
+            return image;
           }
         });
-        dispatch(setProducts(state));
+        dispatch(setImages(state));
       })
       .finally(() => {
         dispatch(setLoading(false));
@@ -77,16 +77,16 @@ export function productEdit(data) {
   };
 }
 
-export function productDelete(id) {
+export function imageDelete(id) {
   return (dispatch, getState) => {
-    dispatch(setLoading('delete'));
-    return fetching(`http://localhost:3000/Products/${id}`, "DELETE")
+    dispatch(setLoading(true));
+    fetching(`http://localhost:3000/Images/${id}`, "DELETE")
       .then((resp) => {
         let state = getState();
-        state = state.productReducer.products.filter(
-          (product) => product.id !== +id
+        state = state.imageReducer.images.filter(
+          (image) => image.id !== +id
         );
-        dispatch(setProducts(state));
+        dispatch(setImages(state));
       })
       .finally(() => {
         dispatch(setLoading(false));

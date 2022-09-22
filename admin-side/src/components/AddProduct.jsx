@@ -1,7 +1,8 @@
 import Backdrop from "./Backdrop";
 import { useState } from 'react'
 import { addProduct } from "../store/productActions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import ButtonSpinner from "./ButtonSpinner"
 export default function AddProduct(props) {
     const [product, setProduct] = useState({
         name: '',
@@ -13,13 +14,20 @@ export default function AddProduct(props) {
         Image2: '',
     })
 
+    const { loading } = useSelector((state) => {
+        return state.productReducer
+    })
+
     const dispatch = useDispatch()
 
     const submitHandler = (e) => {
         e.preventDefault()
         setProduct({ ...product, Images: [{ id: '1', imgUrl: product.Image1 }, { id: '2', imgUrl: product.Image2 }] })
         dispatch(addProduct(product))
-        props.clicked()
+            .then(() => {
+                props.clicked()
+                props.trigger('Check', "Product added successfully")
+            })
     }
 
     const onChangeHandler = (e) => {
@@ -131,9 +139,10 @@ export default function AddProduct(props) {
                                 </div>
                             </div>
                             <div className="p-6 border-t border-gray-200 rounded-b">
-                                <button
+                                {loading === 'add' && <ButtonSpinner color="blue" />}
+                                {!loading && <button
                                     className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-                                    type="submit">Add product</button>
+                                    type="submit">Add product</button>}
                             </div>
                         </div>
                     </form>

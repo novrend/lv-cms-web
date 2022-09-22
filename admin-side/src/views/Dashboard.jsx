@@ -7,14 +7,20 @@ import EditProduct from '../components/EditProduct'
 import { useState } from 'react'
 import ModalConfirmation from '../components/ModalConfirmation'
 import { fetching } from '../helpers'
+import SkeletonDashboard from '../components/SkeletonDashboard'
+import ButtonSpinner from '../components/ButtonSpinner'
+import Toast from '../components/Toast'
 export default function Dashboard() {
     const [addClicked, setAddClicked] = useState(false)
     const [editClicked, setEditClicked] = useState(false)
     const [deleteClicked, setDeleteClicked] = useState(false)
     const [product, setProduct] = useState({})
     const [choosenId, setChoosenId] = useState()
+    const [editLoading, setEditLoading] = useState(false)
+    const [show, setShow] = useState(false)
+    const [toast, setToast] = useState([0, 0])
 
-    const { products } = useSelector((state) => {
+    const { products, loading } = useSelector((state) => {
         return state.productReducer
     })
 
@@ -41,24 +47,43 @@ export default function Dashboard() {
     }
     function deleteHandler() {
         dispatch(productDelete(choosenId))
-        setDeleteClicked(false)
+            .then(() => {
+                trigger('Check', "Product deleted successfully")
+                setDeleteClicked(false)
+            })
     }
     function switchEditModal() {
         editClicked ? setEditClicked(false) : setEditClicked(true)
     }
     function editClickHandler(e) {
+        setEditLoading(e.target.id);
         fetching(`http://localhost:3000/Products/${e.target.id}`)
             .then((resp) => {
                 setProduct(resp);
             })
             .then(() => {
                 switchEditModal()
+                setEditLoading(false)
             })
+    }
+    let counter = 0
+    function trigger(type, text) {
+        setToast([type, text])
+        setShow(true);
+        counter = 3
+        timeout();
+    }
+    function timeout() {
+        if (--counter > 0) {
+            return setTimeout(timeout, 1000);
+        }
+        setShow(false);
     }
     return (
         <section>
-            {addClicked && <AddProduct clicked={addClickHandler} categories={categories} />}
-            {editClicked && <EditProduct clicked={editClickHandler} switch={switchEditModal} product={product} categories={categories} />}
+            <Toast type={toast[0]} show={show} text={toast[1]} />
+            {addClicked && <AddProduct clicked={addClickHandler} categories={categories} trigger={trigger} />}
+            {editClicked && <EditProduct clicked={editClickHandler} switch={switchEditModal} product={product} categories={categories} trigger={trigger} />}
             {deleteClicked && <ModalConfirmation clicked={deleteClickHandler} confirmed={deleteHandler} />}
             <div
                 className="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5">
@@ -120,9 +145,8 @@ export default function Dashboard() {
                                         </th>
                                     </tr>
                                 </thead>
-                                <tbody
-                                    className="bg-white divide-y divide-gray-200">
-
+                                <tbody className="bg-white divide-y divide-gray-200">
+                                    {loading === 'fetch' && <SkeletonDashboard />}
                                     {products.map((product, i) => {
                                         return (
                                             <tr className="hover:bg-gray-100" key={product.id}>
@@ -156,7 +180,8 @@ export default function Dashboard() {
                                                     </button>
                                                 </td>
                                                 <td className="p-4 space-x-2 whitespace-nowrap text-right">
-                                                    <button type="button" data-modal-toggle="product-modal"
+                                                    {editLoading == product.id && <ButtonSpinner color="blue" size="small" />}
+                                                    {editLoading != product.id && <button type="button" data-modal-toggle="product-modal"
                                                         onClick={editClickHandler}
                                                         id={product.id}
                                                         className="inline-flex items-center px-3 py-2 text-sm text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300">
@@ -170,7 +195,7 @@ export default function Dashboard() {
                                                                 clipRule="evenodd"></path>
                                                         </svg>
                                                         Edit item
-                                                    </button>
+                                                    </button>}
                                                     <button type="button" data-modal-toggle="delete-product-modal"
                                                         id={product.id}
                                                         onClick={deleteClickHandler}

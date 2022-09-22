@@ -12,7 +12,10 @@ export default function EditCategory(props) {
         e.preventDefault()
 
         dispatch(categoryEdit(category))
-        props.switch()
+            .then(() => {
+                props.switch()
+                props.trigger('Check', "Category edited successfully")
+            })
     }
 
     const onChangeHandler = (e) => {

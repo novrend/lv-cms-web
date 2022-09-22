@@ -1,7 +1,8 @@
-import { SET_PRODUCTS, ADD_PRODUCT } from "../actionTypes";
+import { SET_PRODUCTS, ADD_PRODUCT, SET_LOADING } from "../actionTypes";
 
 const initialState = {
   products: [],
+  loading: true,
 };
 
 function productReducer(state = initialState, action) {
@@ -15,6 +16,11 @@ function productReducer(state = initialState, action) {
       return {
         ...state,
         products: [...state.products, action.data],
+      };
+    case SET_LOADING:
+      return {
+        ...state,
+        loading: action.data,
       };
     default:
       return state;

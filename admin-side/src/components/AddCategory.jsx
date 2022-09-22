@@ -13,7 +13,10 @@ export default function AddCategory(props) {
     const submitHandler = (e) => {
         e.preventDefault()
         dispatch(addCategory(category))
-        props.clicked()
+            .then(() => {
+                props.clicked()
+                props.trigger('Check', "Category added successfully")
+            })
     }
 
     const onChangeHandler = (e) => {

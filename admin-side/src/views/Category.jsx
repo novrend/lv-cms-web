@@ -6,12 +6,15 @@ import { useState } from 'react'
 import EditCategory from '../components/EditCategory'
 import ModalConfirmation from '../components/ModalConfirmation'
 import { fetching } from '../helpers'
+import Toast from '../components/Toast'
 export default function Category() {
     const [addClicked, setAddClicked] = useState(false)
     const [editClicked, setEditClicked] = useState(false)
     const [deleteClicked, setDeleteClicked] = useState(false)
     const [choosenId, setChoosenId] = useState(0)
     const [category, setCategory] = useState({})
+    const [show, setShow] = useState(false)
+    const [toast, setToast] = useState([0, 0])
     const { categories } = useSelector((state) => {
         return state.categoryReducer
     })
@@ -31,7 +34,10 @@ export default function Category() {
     }
     function deleteHandler() {
         dispatch(categoryDelete(choosenId))
-        setDeleteClicked(false)
+            .then(() => {
+                setDeleteClicked(false)
+                trigger('Check', "Category deleted successfully")
+            })
     }
     function switchEditModal() {
         editClicked ? setEditClicked(false) : setEditClicked(true)
@@ -45,10 +51,24 @@ export default function Category() {
                 switchEditModal()
             })
     }
+    let counter = 0
+    function trigger(type, text) {
+        setToast([type, text])
+        setShow(true);
+        counter = 3
+        timeout();
+    }
+    function timeout() {
+        if (--counter > 0) {
+            return setTimeout(timeout, 1000);
+        }
+        setShow(false);
+    }
     return (
         <section>
-            {addClicked && <AddCategory clicked={addClickHandler} />}
-            {editClicked && <EditCategory switch={switchEditModal} category={category} />}
+            <Toast type={toast[0]} show={show} text={toast[1]} />
+            {addClicked && <AddCategory clicked={addClickHandler} trigger={trigger} />}
+            {editClicked && <EditCategory switch={switchEditModal} category={category} trigger={trigger} />}
             {deleteClicked && <ModalConfirmation clicked={deleteClickHandler} confirmed={deleteHandler} />}
             <div
                 className="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5">
