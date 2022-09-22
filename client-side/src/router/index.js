@@ -1,16 +1,17 @@
 import { createBrowserRouter } from "react-router-dom";
-import Navbar from "../components/Navbar";
+import Template from "../components/Template";
+import Banner from "../components/Banner";
 import Content from "../views/Content";
 import ContentDetail from "../views/ContentDetail";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Navbar />,
+    element: <Template />,
     children: [
       {
         path: "",
-        element: <Content />,
+        element: <Banner />,
       },
       {
         path: "product/:id",

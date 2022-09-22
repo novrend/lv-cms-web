@@ -1,4 +1,4 @@
-import { NavLink, Outlet, Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux'
 import { categoriesFetch } from "../store/categoriesActions";
 import { useEffect, useState } from "react";
@@ -56,15 +56,14 @@ export default function Navbar() {
                         </li>
                         {categories.map(category => {
                             return (
-                                <li>
-                                    <NavLink key={category.id} to={`${category.name}`} className={({ isActive }) => `text-gray-900 ${isActive ? 'underline underline-offset-[19px]' : 'hover:underline hover:underline-offset-[19px]'}`}>{category.name}</NavLink>
+                                <li key={category.id}>
+                                    <NavLink to={`${category.name}`} className={({ isActive }) => `text-gray-900 ${isActive ? 'underline underline-offset-[19px]' : 'hover:underline hover:underline-offset-[19px]'}`}>{category.name}</NavLink>
                                 </li>
                             )
                         })}
                     </ul>}
                 </div>
             </nav>
-            <Outlet />
         </section>
     )
 }

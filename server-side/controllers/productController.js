@@ -5,7 +5,7 @@ class productController {
     try {
       const products = await Product.findAll({
         include: [
-          { model: User, attributes: ["email"] },
+          { model: User, attributes: ["username"] },
           { model: Image },
           { model: Category },
         ],
@@ -24,7 +24,7 @@ class productController {
           id,
         },
         include: [
-          { model: User, attributes: ["email"] },
+          { model: User, attributes: ["username"] },
           { model: Image },
           { model: Category },
         ],

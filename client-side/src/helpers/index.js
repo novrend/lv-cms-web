@@ -1,5 +1,5 @@
 export const fetching = (url, method = "GET", headers = null, body = null) => {
-  const fetching = fetch(url, {
+  return fetch(url, {
     method,
     headers: {
       ...headers,
@@ -8,5 +8,4 @@ export const fetching = (url, method = "GET", headers = null, body = null) => {
   }).then((response) => {
     return response.json();
   });
-  return fetching;
 };
