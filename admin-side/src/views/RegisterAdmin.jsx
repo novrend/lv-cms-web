@@ -2,9 +2,11 @@ import { useState } from 'react'
 import Toast from '../components/Toast'
 import { baseUrl } from '../config/config'
 import { fetching } from '../helpers'
+import ButtonSpinner from '../components/ButtonSpinner'
 export default function RegisterAdmin() {
     const [show, setShow] = useState(false)
     const [toast, setToast] = useState([0, 0])
+    const [loading, setLoading] = useState(false)
     const [user, setUser] = useState({
         username: '',
         email: '',
@@ -15,6 +17,7 @@ export default function RegisterAdmin() {
 
     const handleRegister = (e) => {
         e.preventDefault()
+        setLoading(true)
         fetching(`${baseUrl}/user/register`, "POST", { access_token: localStorage.getItem("access_token"), "Content-Type": "application/json" }, user)
             .then((resp) => {
                 if (resp?.error) throw resp
@@ -23,6 +26,9 @@ export default function RegisterAdmin() {
             })
             .catch(error => {
                 trigger('Error', error.message)
+            })
+            .finally(() => {
+                setLoading(false)
             })
     }
 
@@ -112,8 +118,9 @@ export default function RegisterAdmin() {
                         placeholder="Jl. Sultan Iskandar Muda, Pondok Indah"
                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"></textarea>
                 </div>
-                <button type="submit"
-                    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Submit</button>
+                {loading && <ButtonSpinner color="blue" />}
+                {!loading && <button type="submit"
+                    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Submit</button>}
             </form>
         </section>
     )

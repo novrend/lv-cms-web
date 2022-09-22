@@ -16,6 +16,7 @@ function setLoading(data) {
 
 export function categoriesFetch() {
   return (dispatch, getState) => {
+    dispatch(setCategories([]));
     dispatch(setLoading("fetch"));
     return fetching(`${baseUrl}/category`)
       .then((resp) => {
@@ -54,7 +55,7 @@ export function addCategory(payload) {
 
 export function categoryEdit(data) {
   return (dispatch, getState) => {
-    dispatch(setLoading(true));
+    dispatch(setLoading("edit"));
     return fetching(
       `${baseUrl}/category/${data.id}`,
       "PUT",

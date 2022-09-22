@@ -8,13 +8,15 @@ import ModalConfirmation from '../components/ModalConfirmation'
 import { fetching } from '../helpers'
 import Toast from '../components/Toast'
 import { baseUrl } from '../config/config'
-
+import SkeletonCategory from '../components/SkeletonCategory'
+import ButtonSpinner from "../components/ButtonSpinner"
 export default function Category() {
     const [addClicked, setAddClicked] = useState(false)
     const [editClicked, setEditClicked] = useState(false)
     const [deleteClicked, setDeleteClicked] = useState(false)
     const [choosenId, setChoosenId] = useState(0)
     const [category, setCategory] = useState({})
+    const [editLoading, setEditLoading] = useState(false)
     const [show, setShow] = useState(false)
     const [toast, setToast] = useState([0, 0])
     const { categories, loading } = useSelector((state) => {
@@ -41,7 +43,6 @@ export default function Category() {
         deleteClicked ? setDeleteClicked(false) : setDeleteClicked(true)
     }
     function deleteHandler() {
-        console.log(choosenId)
         dispatch(categoryDelete(choosenId))
             .then((resp) => {
                 if (resp?.error) throw resp
@@ -78,6 +79,7 @@ export default function Category() {
         editClicked ? setEditClicked(false) : setEditClicked(true)
     }
     function editClickHandler(e) {
+        setEditLoading(e.target.id);
         fetching(`${baseUrl}/category/${e.target.id}`, 'GET', {
             access_token: localStorage.getItem("access_token")
         })
@@ -87,6 +89,7 @@ export default function Category() {
             })
             .then(() => {
                 switchEditModal()
+                setEditLoading(false)
             })
             .catch(error => {
                 trigger('Error', error.message)
@@ -157,8 +160,8 @@ export default function Category() {
                                         </th>
                                     </tr>
                                 </thead>
-                                <tbody
-                                    className="bg-white divide-y divide-gray-200">
+                                <tbody className="bg-white divide-y divide-gray-200">
+                                    {loading === 'fetch' && <SkeletonCategory />}
                                     {categories.map((category, i) => {
                                         return (
                                             <tr className="hover:bg-gray-100" key={i}>
@@ -169,7 +172,8 @@ export default function Category() {
                                                     className="p-4 text-base font-medium text-gray-900 whitespace-nowrap">
                                                     {category.name}</td>
                                                 <td className="p-4 space-x-2 whitespace-nowrap text-right">
-                                                    <button type="button" data-modal-toggle="category-modal"
+                                                    {editLoading == category.id && <ButtonSpinner color="blue" size="small" />}
+                                                    {editLoading != category.id && <button type="button" data-modal-toggle="category-modal"
                                                         id={category.id}
                                                         onClick={editClickHandler}
                                                         className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300">
@@ -183,7 +187,7 @@ export default function Category() {
                                                                 clipRule="evenodd"></path>
                                                         </svg>
                                                         Edit item
-                                                    </button>
+                                                    </button>}
                                                     <button type="button" data-modal-toggle="delete-category-modal"
                                                         id={category.id}
                                                         onClick={deleteClickHandler}

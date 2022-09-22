@@ -14,6 +14,21 @@ function setLoading(data) {
   };
 }
 
+export function productsFetch() {
+  return (dispatch, getState) => {
+    dispatch(setProducts([]));
+    dispatch(setLoading("fetch"));
+    return fetching(`${baseUrl}/product`)
+      .then((resp) => {
+        if (resp?.error?.message) return resp;
+        dispatch(setProducts(resp));
+      })
+      .finally(() => {
+        dispatch(setLoading(false));
+      });
+  };
+}
+
 export function addProduct(payload) {
   return (dispatch, getState) => {
     dispatch(setLoading("add"));
@@ -38,23 +53,9 @@ export function addProduct(payload) {
   };
 }
 
-export function productsFetch() {
-  return (dispatch, getState) => {
-    dispatch(setLoading("fetch"));
-    return fetching(`${baseUrl}/product`)
-      .then((resp) => {
-        if (resp?.error?.message) return resp;
-        dispatch(setProducts(resp));
-      })
-      .finally(() => {
-        dispatch(setLoading(false));
-      });
-  };
-}
-
 export function productEdit(data) {
   return (dispatch, getState) => {
-    dispatch(setLoading(true));
+    dispatch(setLoading('edit'));
     return fetching(
       `${baseUrl}/product/${data.id}`,
       "PUT",

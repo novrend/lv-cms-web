@@ -1,9 +1,14 @@
 import { useState } from "react";
 import Backdrop from "./Backdrop";
-
+import { useSelector } from "react-redux";
+import ButtonSpinner from "./ButtonSpinner"
 export default function AddCategory(props) {
     const [category, setCategory] = useState({
         name: '',
+    })
+
+    const { loading } = useSelector((state) => {
+        return state.productReducer
     })
 
     const submitHandler = (e) => {
@@ -56,9 +61,10 @@ export default function AddCategory(props) {
                                 </div>
                             </div>
                             <div className="p-6 border-t border-gray-200 rounded-b">
-                                <button
+                                {loading === 'add' && <ButtonSpinner color="blue" />}
+                                {!loading && <button
                                     className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-                                    type="submit">Add product</button>
+                                    type="submit">Add category</button>}
                             </div>
                         </div>
                     </form>

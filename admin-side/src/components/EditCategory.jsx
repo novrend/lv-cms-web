@@ -1,8 +1,13 @@
 import { useState } from "react";
 import Backdrop from "./Backdrop";
-
+import { useSelector } from "react-redux";
+import ButtonSpinner from "./ButtonSpinner"
 export default function EditCategory(props) {
     const [category, setCategory] = useState({ ...props.category })
+
+    const { loading } = useSelector((state) => {
+        return state.productReducer
+    })
 
     function editHandler(e) {
         e.preventDefault()
@@ -53,9 +58,10 @@ export default function EditCategory(props) {
                                 </div>
                             </div>
                             <div className="p-6 border-t border-gray-200 rounded-b">
-                                <button
+                                {loading === 'edit' && <ButtonSpinner color="blue" />}
+                                {!loading && <button
                                     className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-                                    type="submit">Save all</button>
+                                    type="submit">Save all</button>}
                             </div>
                         </div>
                     </form>

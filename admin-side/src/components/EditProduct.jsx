@@ -162,7 +162,7 @@ export default function EditProduct(props) {
                                 </div>
                             </div>
                             <div className="p-6 border-t border-gray-200 rounded-b">
-                                {loading && <ButtonSpinner color="blue" />}
+                                {loading === 'edit' && <ButtonSpinner color="blue" />}
                                 {!loading && <button
                                     className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                                     type="submit">Save all</button>}
