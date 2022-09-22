@@ -7,6 +7,8 @@ import EditCategory from '../components/EditCategory'
 import ModalConfirmation from '../components/ModalConfirmation'
 import { fetching } from '../helpers'
 import Toast from '../components/Toast'
+import { baseUrl } from '../config/config'
+
 export default function Category() {
     const [addClicked, setAddClicked] = useState(false)
     const [editClicked, setEditClicked] = useState(false)
@@ -44,7 +46,7 @@ export default function Category() {
         editClicked ? setEditClicked(false) : setEditClicked(true)
     }
     function editClickHandler(e) {
-        fetching(`http://localhost:3000/category/${e.target.id}`, 'GET', {
+        fetching(`${baseUrl}/category/${e.target.id}`, 'GET', {
             access_token: localStorage.getItem("access_token")
         })
             .then((resp) => {

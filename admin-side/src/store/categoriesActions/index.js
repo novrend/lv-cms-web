@@ -1,5 +1,6 @@
 import { ADD_CATEGORY, SET_CATEGORIES, SET_LOADING } from "../actionTypes";
 import { fetching } from "../../helpers";
+import { baseUrl } from "../../config/config";
 function setCategories(resp) {
   return {
     type: SET_CATEGORIES,
@@ -16,7 +17,7 @@ function setLoading(data) {
 export function categoriesFetch() {
   return (dispatch, getState) => {
     dispatch(setLoading("fetch"));
-    fetching("http://localhost:3000/category")
+    fetching(`${baseUrl}/category`)
       .then((resp) => {
         dispatch(setCategories(resp));
       })
@@ -30,7 +31,7 @@ export function addCategory(payload) {
   return (dispatch, getState) => {
     dispatch(setLoading("add"));
     return fetching(
-      "http://localhost:3000/category",
+      `${baseUrl}/category`,
       "POST",
       {
         access_token: localStorage.getItem("access_token"),
@@ -54,7 +55,7 @@ export function categoryEdit(data) {
   return (dispatch, getState) => {
     dispatch(setLoading(true));
     return fetching(
-      `http://localhost:3000/category/${data.id}`,
+      `${baseUrl}/category/${data.id}`,
       "PUT",
       {
         access_token: localStorage.getItem("access_token"),
@@ -82,7 +83,7 @@ export function categoryEdit(data) {
 export function categoryDelete(id) {
   return (dispatch, getState) => {
     dispatch(setLoading("delete"));
-    return fetching(`http://localhost:3000/category/${id}`, "DELETE", {
+    return fetching(`${baseUrl}/category/${id}`, "DELETE", {
       access_token: localStorage.getItem("access_token"),
     })
       .then((resp) => {

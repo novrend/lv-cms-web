@@ -1,5 +1,6 @@
 import { SET_CATEGORIES } from "../actionTypes";
 import { fetching } from "../../helpers";
+import { baseUrl } from "../../config/config";
 function setCategories(resp) {
   return {
     type: SET_CATEGORIES,
@@ -9,7 +10,7 @@ function setCategories(resp) {
 
 export function categoriesFetch() {
   return (dispatch, getState) => {
-    fetching("http://localhost:3000/category").then((resp) => {
+    fetching(`${baseUrl}/category`).then((resp) => {
       dispatch(setCategories(resp));
     });
   };

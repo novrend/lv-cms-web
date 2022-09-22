@@ -1,13 +1,14 @@
 import { useState } from "react"
 import { useEffect } from "react"
 import { useParams } from "react-router-dom"
+import { baseUrl } from "../config/config"
 import { fetching } from "../helpers"
 
 export default function ContentDetail() {
     const [product, setProduct] = useState({})
     const { id } = useParams()
     useEffect(() => {
-        fetching(`http://localhost:3000/product/${id}`)
+        fetching(`${baseUrl}/product/${id}`)
             .then((resp) => {
                 setProduct(resp)
             })

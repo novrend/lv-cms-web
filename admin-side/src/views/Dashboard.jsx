@@ -10,6 +10,8 @@ import { fetching } from '../helpers'
 import SkeletonDashboard from '../components/SkeletonDashboard'
 import ButtonSpinner from '../components/ButtonSpinner'
 import Toast from '../components/Toast'
+import { baseUrl } from '../config/config'
+
 export default function Dashboard() {
     const [addClicked, setAddClicked] = useState(false)
     const [editClicked, setEditClicked] = useState(false)
@@ -57,7 +59,7 @@ export default function Dashboard() {
     }
     function editClickHandler(e) {
         setEditLoading(e.target.id);
-        fetching(`http://localhost:3000/product/${e.target.id}`, 'GET', {
+        fetching(`${baseUrl}/product/${e.target.id}`, 'GET', {
             access_token: localStorage.getItem("access_token")
         })
             .then((resp) => {

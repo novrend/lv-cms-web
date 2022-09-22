@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { fetching } from '../helpers'
 import { useNavigate, Navigate } from 'react-router-dom'
+import { baseUrl } from '../config/config';
 export default function Login() {
     const navigate = useNavigate();
     const [user, setUser] = useState({
@@ -10,7 +11,7 @@ export default function Login() {
 
     const handleLogin = (e) => {
         e.preventDefault()
-        fetching("http://localhost:3000/user/login", "POST", { "Content-Type": "application/json" }, user)
+        fetching(`${baseUrl}/user/login`, "POST", { "Content-Type": "application/json" }, user)
             .then((resp) => {
                 localStorage.setItem('access_token', resp.access_token)
                 navigate('/')

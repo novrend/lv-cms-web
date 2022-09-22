@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Toast from '../components/Toast'
+import { baseUrl } from '../config/config'
 import { fetching } from '../helpers'
 export default function RegisterAdmin() {
     const [show, setShow] = useState(false)
@@ -14,7 +15,7 @@ export default function RegisterAdmin() {
 
     const handleRegister = (e) => {
         e.preventDefault()
-        fetching("http://localhost:3000/user/register", "POST", { "Content-Type": "application/json" }, user)
+        fetching(`${baseUrl}/user/register`, "POST", { access_token: localStorage.getItem("access_token"), "Content-Type": "application/json" }, user)
             .then((resp) => {
                 setUser(resp);
                 trigger('Check', "Admin registration success")

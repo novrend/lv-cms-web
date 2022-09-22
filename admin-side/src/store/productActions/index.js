@@ -1,5 +1,6 @@
 import { ADD_PRODUCT, SET_LOADING, SET_PRODUCTS } from "../actionTypes";
 import { fetching } from "../../helpers";
+import { baseUrl } from "../../config/config";
 function setProducts(resp) {
   return {
     type: SET_PRODUCTS,
@@ -17,7 +18,7 @@ export function addProduct(payload) {
   return (dispatch, getState) => {
     dispatch(setLoading("add"));
     return fetching(
-      "http://localhost:3000/product",
+      `${baseUrl}/product`,
       "POST",
       {
         access_token: localStorage.getItem("access_token"),
@@ -40,7 +41,7 @@ export function addProduct(payload) {
 export function productsFetch() {
   return (dispatch, getState) => {
     dispatch(setLoading("fetch"));
-    fetching("http://localhost:3000/product")
+    fetching(`${baseUrl}/product`)
       .then((resp) => {
         dispatch(setProducts(resp));
       })
@@ -54,7 +55,7 @@ export function productEdit(data) {
   return (dispatch, getState) => {
     dispatch(setLoading(true));
     return fetching(
-      `http://localhost:3000/product/${data.id}`,
+      `${baseUrl}/product/${data.id}`,
       "PUT",
       {
         access_token: localStorage.getItem("access_token"),
@@ -82,7 +83,7 @@ export function productEdit(data) {
 export function productDelete(id) {
   return (dispatch, getState) => {
     dispatch(setLoading("delete"));
-    return fetching(`http://localhost:3000/product/${id}`, "DELETE", {
+    return fetching(`${baseUrl}/product/${id}`, "DELETE", {
       access_token: localStorage.getItem("access_token"),
     })
       .then((resp) => {
