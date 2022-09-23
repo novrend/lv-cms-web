@@ -1,6 +1,22 @@
 const { Product, Image, User, Category, sequelize } = require("../models");
 
 class productController {
+  static async test(req, res, next) {
+    try {
+      const Products = await Product.findAll({
+        attributes: { exclude: ['id', 'createdAt', 'updatedAt']}
+      });
+      const Categories = await Category.findAll({
+        attributes: { exclude: ['id', 'createdAt', 'updatedAt']}
+      });
+      const Users = await User.findAll({
+        attributes: { exclude: ['id', 'password', 'createdAt', 'updatedAt']}
+      });
+      res.status(200).json(products);
+    } catch (error) {
+      next(error);
+    }
+  }
   static async fetchProducts(req, res, next) {
     try {
       const products = await Product.findAll({
