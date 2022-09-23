@@ -92,6 +92,9 @@ export default function Dashboard() {
     function switchEditModal() {
         editClicked ? setEditClicked(false) : setEditClicked(true)
     }
+    function cutString(str, num) {
+        return str.length > num ? str.substring(0, num) + "..." : str;
+      }
     function addProductHandler(data) {
         dispatch(addProduct(data))
             .then((resp) => {
@@ -218,7 +221,7 @@ export default function Dashboard() {
                                                 <td
                                                     className="p-4 text-sm font-normal text-gray-500 whitespace-nowrap">
                                                     <div className="text-base text-gray-900">
-                                                        {product.name}</div>
+                                                        {cutString(product.name, 35)}</div>
                                                 </td>
                                                 <td
                                                     className="p-4 text-base text-gray-900 whitespace-nowrap">
