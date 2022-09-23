@@ -1,1 +1,1 @@
-export const baseUrl = "http://localhost:3000/pub";
+export const baseUrl = "https://louis-vuitton-p3.herokuapp.com/pub";
