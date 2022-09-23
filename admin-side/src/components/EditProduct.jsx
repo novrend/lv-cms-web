@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import Backdrop from "./Backdrop";
 import ButtonSpinner from "./ButtonSpinner"
 export default function EditProduct(props) {
+
     const [product, setProduct] = useState({
         id: props.product.id,
         name: props.product.name,
@@ -32,7 +33,6 @@ export default function EditProduct(props) {
         setProduct({
             ...product, [name]: e.target.value
         })
-        console.log(product)
     }
     return (
         <section>

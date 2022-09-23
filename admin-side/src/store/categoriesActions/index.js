@@ -18,7 +18,9 @@ export function categoriesFetch() {
   return (dispatch, getState) => {
     dispatch(setCategories([]));
     dispatch(setLoading("fetch"));
-    return fetching(`${baseUrl}/category`)
+    return fetching(`${baseUrl}/category`, 'GET', {
+      access_token: localStorage.getItem("access_token"),
+    })
       .then((resp) => {
         if (resp?.error) {
           dispatch(setLoading(false));
@@ -113,5 +115,15 @@ export function categoryDelete(id) {
       .finally(() => {
         dispatch(setLoading(false));
       });
+  };
+}
+
+export function getCategory(id, access_token) {
+  return (dispatch, getState) => {
+    return fetching(`${baseUrl}/category/${id}`, "GET", {
+      access_token,
+    }).then((resp) => {
+      return resp;
+    });
   };
 }

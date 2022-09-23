@@ -13,7 +13,6 @@ module.exports = {
      * }], {});
      */
     data.Users.forEach((el) => {
-      delete el.id;
       el.password = hashBcrypt(el.password);
       el.createdAt = el.updatedAt = new Date();
     });

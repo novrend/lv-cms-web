@@ -1,4 +1,4 @@
-import { productDelete, productsFetch, productEdit, addProduct } from '../store/productActions'
+import { productDelete, productsFetch, productEdit, addProduct, getProduct } from '../store/productActions'
 import { categoriesFetch } from '../store/categoriesActions'
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
@@ -6,11 +6,9 @@ import AddProduct from '../components/AddProduct'
 import EditProduct from '../components/EditProduct'
 import { useState } from 'react'
 import ModalConfirmation from '../components/ModalConfirmation'
-import { fetching } from '../helpers'
 import SkeletonDashboard from '../components/SkeletonDashboard'
 import ButtonSpinner from '../components/ButtonSpinner'
 import Toast from '../components/Toast'
-import { baseUrl } from '../config/config'
 import ViewImages from '../components/ViewImages'
 
 export default function Dashboard() {
@@ -58,11 +56,9 @@ export default function Dashboard() {
     function viewImagesHandler() {
         viewImage ? setViewImage(false) : setViewImage(true)
     }
-    function viewClickHandler(e) {
-        setViewLoading(e.target.id);
-        fetching(`${baseUrl}/product/${e.target.id}`, 'GET', {
-            access_token: localStorage.getItem("access_token")
-        })
+    function viewClickHandler(id) {
+        setViewLoading(id);
+        dispatch(getProduct(id, localStorage.getItem("access_token")))
             .then((resp) => {
                 if (resp?.error) throw resp
                 setProduct(resp);
@@ -78,8 +74,8 @@ export default function Dashboard() {
     function addClickHandler() {
         addClicked ? setAddClicked(false) : setAddClicked(true)
     }
-    function deleteClickHandler(e) {
-        setChoosenId(e.target.id)
+    function deleteClickHandler(id) {
+        setChoosenId(id)
         deleteClicked ? setDeleteClicked(false) : setDeleteClicked(true)
     }
     function deleteHandler() {
@@ -118,16 +114,12 @@ export default function Dashboard() {
                 trigger('Error', error.message)
             })
     }
-    function editClickHandler(e) {
-        setEditLoading(e.target.id);
-        fetching(`${baseUrl}/product/${e.target.id}`, 'GET', {
-            access_token: localStorage.getItem("access_token")
-        })
+    function editClickHandler(id) {
+        setEditLoading(id);
+        dispatch(getProduct(id, localStorage.getItem("access_token")))
             .then((resp) => {
                 if (resp?.error) throw resp
                 setProduct(resp);
-            })
-            .then(() => {
                 switchEditModal()
                 setEditLoading(false)
             })
@@ -151,8 +143,8 @@ export default function Dashboard() {
     return (
         <section>
             <Toast type={toast[0]} show={show} text={toast[1]} />
-            {addClicked && <AddProduct clicked={addClickHandler} switch={addProductHandler} categories={categories} trigger={trigger} />}
-            {editClicked && <EditProduct clicked={editClickHandler} switch={editProduct} product={product} categories={categories} trigger={trigger} />}
+            {addClicked && <AddProduct clicked={addClickHandler} switch={addProductHandler} categories={categories} />}
+            {editClicked && <EditProduct clicked={switchEditModal} switch={editProduct} product={product} categories={categories} />}
             {deleteClicked && <ModalConfirmation clicked={deleteClickHandler} confirmed={deleteHandler} />}
             {viewImage && <ViewImages clicked={viewImagesHandler} product={product} />}
             <div
@@ -241,7 +233,7 @@ export default function Dashboard() {
                                                     {viewLoading == product.id && <ButtonSpinner color="blue" size="small" />}
                                                     {viewLoading != product.id &&
                                                         <button type="button" data-modal-toggle="product-modal"
-                                                            onClick={viewClickHandler} id={product.id}
+                                                            onClick={() => viewClickHandler(product.id)}
                                                             className="inline-flex items-center px-3 py-2 text-sm text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300">
                                                             <svg className="w-5 h-5 mr-2" fill="currentColor"
                                                                 viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -254,24 +246,23 @@ export default function Dashboard() {
                                                 </td>
                                                 <td className="p-4 space-x-2 whitespace-nowrap text-right">
                                                     {editLoading == product.id && <ButtonSpinner color="blue" size="small" />}
-                                                    {editLoading != product.id && <button type="button" data-modal-toggle="product-modal"
-                                                        onClick={editClickHandler}
-                                                        id={product.id}
-                                                        className="inline-flex items-center px-3 py-2 text-sm text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300">
-                                                        <svg className="w-5 h-5 mr-2" fill="currentColor"
-                                                            viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z">
-                                                            </path>
-                                                            <path fillRule="evenodd"
-                                                                d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
-                                                                clipRule="evenodd"></path>
-                                                        </svg>
-                                                        Edit
-                                                    </button>}
+                                                    {editLoading != product.id &&
+                                                        <button type="button" data-modal-toggle="product-modal"
+                                                            onClick={() => editClickHandler(product.id)}
+                                                            className="inline-flex items-center px-3 py-2 text-sm text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300">
+                                                            <svg className="w-5 h-5 mr-2" fill="currentColor"
+                                                                viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                                <path
+                                                                    d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z">
+                                                                </path>
+                                                                <path fillRule="evenodd"
+                                                                    d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
+                                                                    clipRule="evenodd"></path>
+                                                            </svg>
+                                                            Edit
+                                                        </button>}
                                                     <button type="button" data-modal-toggle="delete-product-modal"
-                                                        id={product.id}
-                                                        onClick={deleteClickHandler}
+                                                        onClick={() => deleteClickHandler(product.id)}
                                                         className="inline-flex items-center px-3 py-2 text-sm text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300">
                                                         <svg className="w-5 h-5 mr-2" fill="currentColor"
                                                             viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">

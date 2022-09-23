@@ -35,7 +35,7 @@ export default function Navbar() {
         setShow(false);
     }
     return (
-        <section>
+        <>
             <Toast type={toast[0]} show={show} text={toast[1]} />
             <nav className="bg-white border-gray-200">
                 <Link to="/" className="mx-auto mt-4 max-w-screen-xl px-4 md:px-6 py-2.5 justify-center flex items-center">
@@ -49,7 +49,7 @@ export default function Navbar() {
             <nav className="sticky bg-white top-0 z-50 border-b border-gray-200">
                 <div className="py-3 px-4 mx-auto max-w-screen-xl md:px-6">
                     {loading === 'category' && <NavbarSkeleton />}
-                    {!loading && <ul className="flex flex-wrap justify-center mt-0 space-x-8 text-lg font-medium">
+                    {loading !== 'category' && <ul className="flex flex-wrap justify-center mt-0 space-x-8 text-lg font-medium">
                         <li>
                             <NavLink to="/" className={({ isActive }) => `text-gray-900 ${isActive ? 'underline underline-offset-[19px]' : 'hover:underline hover:underline-offset-[19px]'}`}
                                 aria-current="page" end>Home</NavLink>
@@ -64,6 +64,6 @@ export default function Navbar() {
                     </ul>}
                 </div>
             </nav>
-        </section>
+        </>
     )
 }

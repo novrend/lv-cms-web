@@ -18,7 +18,9 @@ export function productsFetch() {
   return (dispatch, getState) => {
     dispatch(setProducts([]));
     dispatch(setLoading("fetch"));
-    return fetching(`${baseUrl}/product`)
+    return fetching(`${baseUrl}/product`, 'GET', {
+      access_token: localStorage.getItem("access_token"),
+    })
       .then((resp) => {
         if (resp?.error?.message) {
           dispatch(setLoading(false));
@@ -112,5 +114,15 @@ export function productDelete(id) {
       .finally(() => {
         dispatch(setLoading(false));
       });
+  };
+}
+
+export function getProduct(id, access_token) {
+  return (dispatch, getState) => {
+    return fetching(`${baseUrl}/product/${id}`, "GET", {
+      access_token,
+    }).then((resp) => {
+      return resp;
+    });
   };
 }

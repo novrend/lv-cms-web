@@ -12,7 +12,6 @@ module.exports = {
      * }], {});
      */
     data.Images.forEach((el) => {
-      delete el.id;
       el.createdAt = el.updatedAt = new Date();
     });
     await queryInterface.bulkInsert("Images", data.Images, {});

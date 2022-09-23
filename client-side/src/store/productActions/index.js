@@ -32,6 +32,16 @@ export function productsFetch() {
   };
 }
 
+export function getProduct(id) {
+  return (dispatch, getState) => {
+    dispatch(setProducts([]));
+    dispatch(setLoading("product"));
+    return fetching(`${baseUrl}/product/${id}`).then((resp) => {
+      return resp;
+    });
+  };
+}
+
 export function getProductByCategory(name) {
   return (dispatch, getState) => {
     dispatch(setProducts([]));

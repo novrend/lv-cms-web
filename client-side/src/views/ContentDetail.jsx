@@ -2,8 +2,8 @@ import Toast from "../components/Toast"
 import { Carousel } from 'flowbite-react'
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import { baseUrl } from "../config/config"
-import { fetching } from "../helpers"
+import { useDispatch } from 'react-redux'
+import { getProduct } from '../store/productActions'
 import ContentDetailSkeleton from "../components/ContentDetailSkeleton"
 
 export default function ContentDetail() {
@@ -12,9 +12,10 @@ export default function ContentDetail() {
     const [product, setProduct] = useState({})
     const [loading, setLoading] = useState(false)
     const { id } = useParams()
+    const dispatch = useDispatch()
     useEffect(() => {
         setLoading(true)
-        fetching(`${baseUrl}/product/${id}`)
+        dispatch(getProduct(id))
             .then((resp) => {
                 if (resp?.error) throw resp
                 setProduct(resp)
@@ -46,8 +47,8 @@ export default function ContentDetail() {
                 <div className="bg-stone-100 grid grid-cols-2 gap-8 w-full items-center">
                     <Toast type={toast[0]} show={show} text={toast[1]} />
                     <div className="group h-[719px]">
-                        <Carousel indicators={false} slide={false} leftControl={
-                            <div className="transition opacity-0	group-hover:opacity-100 duration-300 absolute top-0 left-0 z-30 flex items-center justify-center h-full cursor-pointer group focus:outline-none">
+                        {true && <Carousel indicators={false} slide={false} leftControl={
+                            <div className="transition opacity-0 group-hover:opacity-100 duration-300 absolute top-0 left-0 z-30 flex items-center justify-center h-full cursor-pointer group focus:outline-none">
                                 <div id="data-carousel-prev" className="flex bg-white w-14 h-14 items-center" data-carousel-prev>
                                     <i className="ml-6 fa-sharp fa-solid fa-chevron-left text-sm"></i>
                                 </div>
@@ -59,10 +60,12 @@ export default function ContentDetail() {
                                     </div>
                                 </div>}>
                             <img src={product.mainImg} />
-                            {/* {product?.Images?.[0]?.imgUrl && product.Images.map(image => <img key={image.id} src={image.imgUrl} />)} */}
-                        </Carousel>
+                            <img src={product?.Images?.[0]?.imgUrl} />
+                            <img src={product?.Images?.[1]?.imgUrl || product?.Images?.[0]?.imgUrl} />
+                        </Carousel>}
                     </div>
                     <div className="ml-20">
+                        <h2 className="text-md pb-2">{product?.Category?.name}</h2>
                         <h2 className="text-3xl pb-4">{product.name}</h2>
                         <h2 className="text-xl pb-4">{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(product.price)}</h2>
                         <button type="button"

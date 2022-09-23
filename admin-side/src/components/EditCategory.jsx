@@ -32,7 +32,7 @@ export default function EditCategory(props) {
                                     Edit category
                                 </h3>
                                 <button type="button"
-                                    onClick={props.switch}
+                                    onClick={props.trigger}
                                     className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"
                                     data-modal-toggle="category-modal">
                                     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"

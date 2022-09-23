@@ -12,7 +12,6 @@ module.exports = {
      * }], {});
      */
     data.Products.forEach((el) => {
-      delete el.id;
       el.description = el.description.slice(0, 254);
       el.slug = el.name.replaceAll(" ", "-").replace(/[^a-z0-9\-]/gi, "");
       el.createdAt = el.updatedAt = new Date();

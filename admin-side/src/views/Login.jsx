@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import { fetching } from '../helpers'
+import { useDispatch } from 'react-redux'
 import { useNavigate, Navigate } from 'react-router-dom'
-import { baseUrl } from '../config/config';
 import Toast from '../components/Toast';
 import ButtonSpinner from '../components/ButtonSpinner'
+import { login } from '../store/userActions';
 export default function Login() {
     const navigate = useNavigate();
     const [user, setUser] = useState({
@@ -13,11 +13,11 @@ export default function Login() {
     const [toast, setToast] = useState([0, 0])
     const [show, setShow] = useState(false)
     const [loading, setLoading] = useState(false)
-
+    const dispatch = useDispatch()
     const handleLogin = (e) => {
         e.preventDefault()
         setLoading(true)
-        fetching(`${baseUrl}/user/login`, "POST", { "Content-Type": "application/json" }, user)
+        dispatch(login(user))
             .then((resp) => {
                 if (resp?.error) throw resp
                 localStorage.setItem('access_token', resp.access_token)

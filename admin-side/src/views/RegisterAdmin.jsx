@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import Toast from '../components/Toast'
-import { baseUrl } from '../config/config'
-import { fetching } from '../helpers'
+import { useDispatch } from 'react-redux'
 import ButtonSpinner from '../components/ButtonSpinner'
+import { register } from '../store/userActions';
 export default function RegisterAdmin() {
     const [show, setShow] = useState(false)
     const [toast, setToast] = useState([0, 0])
@@ -14,11 +14,11 @@ export default function RegisterAdmin() {
         phoneNumber: '',
         address: ''
     })
-
+    const dispatch = useDispatch()
     const handleRegister = (e) => {
         e.preventDefault()
         setLoading(true)
-        fetching(`${baseUrl}/user/register`, "POST", { access_token: localStorage.getItem("access_token"), "Content-Type": "application/json" }, user)
+        dispatch(register(user))
             .then((resp) => {
                 if (resp?.error) throw resp
                 setUser(resp);

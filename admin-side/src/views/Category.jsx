@@ -1,13 +1,11 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
-import { addCategory, categoriesFetch, categoryDelete, categoryEdit } from '../store/categoriesActions'
+import { addCategory, categoriesFetch, categoryDelete, categoryEdit, getCategory } from '../store/categoriesActions'
 import AddCategory from '../components/AddCategory'
 import { useState } from 'react'
 import EditCategory from '../components/EditCategory'
 import ModalConfirmation from '../components/ModalConfirmation'
-import { fetching } from '../helpers'
 import Toast from '../components/Toast'
-import { baseUrl } from '../config/config'
 import SkeletonCategory from '../components/SkeletonCategory'
 import ButtonSpinner from "../components/ButtonSpinner"
 export default function Category() {
@@ -38,8 +36,8 @@ export default function Category() {
     function addClickHandler() {
         addClicked ? setAddClicked(false) : setAddClicked(true)
     }
-    function deleteClickHandler(e) {
-        setChoosenId(e.target.id)
+    function deleteClickHandler(id) {
+        setChoosenId(id)
         deleteClicked ? setDeleteClicked(false) : setDeleteClicked(true)
     }
     function deleteHandler() {
@@ -78,11 +76,9 @@ export default function Category() {
     function switchEditModal() {
         editClicked ? setEditClicked(false) : setEditClicked(true)
     }
-    function editClickHandler(e) {
-        setEditLoading(e.target.id);
-        fetching(`${baseUrl}/category/${e.target.id}`, 'GET', {
-            access_token: localStorage.getItem("access_token")
-        })
+    function editClickHandler(id) {
+        setEditLoading(id);
+        dispatch(getCategory(id, localStorage.getItem("access_token")))
             .then((resp) => {
                 if (resp?.error) throw resp
                 setCategory(resp);
@@ -111,8 +107,8 @@ export default function Category() {
     return (
         <section>
             <Toast type={toast[0]} show={show} text={toast[1]} />
-            {addClicked && <AddCategory clicked={addClickHandler} switch={addCategoryHandler} trigger={trigger} />}
-            {editClicked && <EditCategory switch={editCategory} category={category} trigger={trigger} />}
+            {addClicked && <AddCategory clicked={addClickHandler} switch={addCategoryHandler} />}
+            {editClicked && <EditCategory switch={editCategory} category={category} trigger={switchEditModal} />}
             {deleteClicked && <ModalConfirmation clicked={deleteClickHandler} confirmed={deleteHandler} />}
             <div
                 className="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5">
@@ -174,8 +170,7 @@ export default function Category() {
                                                 <td className="p-4 space-x-2 whitespace-nowrap text-right">
                                                     {editLoading == category.id && <ButtonSpinner color="blue" size="small" />}
                                                     {editLoading != category.id && <button type="button" data-modal-toggle="category-modal"
-                                                        id={category.id}
-                                                        onClick={editClickHandler}
+                                                        onClick={() => editClickHandler(category.id)}
                                                         className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300">
                                                         <svg className="w-5 h-5 mr-2" fill="currentColor"
                                                             viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -189,8 +184,7 @@ export default function Category() {
                                                         Edit
                                                     </button>}
                                                     <button type="button" data-modal-toggle="delete-category-modal"
-                                                        id={category.id}
-                                                        onClick={deleteClickHandler}
+                                                        onClick={() => deleteClickHandler(category.id)}
                                                         className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300">
                                                         <svg className="w-5 h-5 mr-2" fill="currentColor"
                                                             viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">

@@ -46,7 +46,6 @@ class categoryController {
       }
       res.status(200).json(category.Products);
     } catch (error) {
-      console.log(error);
       next(error);
     }
   }

@@ -17,13 +17,11 @@ export default function Banner() {
                         <img className="w-[48rem]" src="https://us.louisvuitton.com/images/is/image/Homepage_Service_Store_Appointment_DI3.jpg?wid=2048" />
                         <h2 className="text-xl font-bold pt-4">Virtual or In-Store Appointments</h2>
                         <h2 className="font-thin text-lg pt-1">Book a personal shopping experience with a Louis Vuitton Client Advisor.</h2>
-                        <span className="font-bold underline underline-offset-4 text-lg pt-1">Book an Appointment</span>
                     </div>
                     <div>
                         <img className="w-[48rem]" src="https://us.louisvuitton.com/images/is/image/Homepage_Service_Contact_Us_DI3.jpg?wid=2048" />
                         <h2 className="text-xl font-bold pt-4">Contact Us</h2>
                         <h2 className="font-thin text-lg pt-1">Louis Vuitton Client Advisors are always here to help.</h2>
-                        <span className="font-bold underline underline-offset-4 text-lg pt-1">Ask Our Advisors</span>
                     </div>
                 </div>
             </div>

@@ -37,7 +37,7 @@ export default function ViewImages(props) {
                                         </div>
                                     </div>}>
                                 {props.product.Images.map(image => (
-                                    <img src={image.imgUrl} className="bg-stone-100" />
+                                    <img key={image.id} src={image.imgUrl} className="bg-stone-100" />
                                 ))}
                                 <img src={props.product.mainImg} className="bg-stone-100" />
                             </Carousel>
