@@ -126,7 +126,7 @@ class productController {
             imgUrl: image1,
           },
           {
-            id: findProduct?.Images?.[1]?.id,
+            id: findProduct.Images[1].id,
             productId: product.id,
             imgUrl: image2,
           },
