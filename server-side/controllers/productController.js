@@ -102,7 +102,7 @@ class productController {
       const findCategory = await Category.findByPk(categoryId);
       if (!findCategory) throw { code: 404, msg: "Category not found" };
 
-      const findProduct = await Product.findByOne({
+      const findProduct = await Product.findOne({
         include: { model: Image },
         where: { id }
       });
