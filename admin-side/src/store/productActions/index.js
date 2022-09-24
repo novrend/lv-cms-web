@@ -22,8 +22,9 @@ export function productsFetch() {
       access_token: localStorage.getItem("access_token"),
     })
       .then((resp) => {
-        if (resp?.error?.message) {
+        if (resp?.error) {
           dispatch(setLoading(false));
+          return resp
         }
         dispatch(setProducts(resp));
       })
@@ -52,9 +53,9 @@ export function addProduct(payload) {
         }
         dispatch(productsFetch()).then((resp) => {
           if (resp?.error) {
-          dispatch(setLoading(false));
-          return resp;
-        }
+            dispatch(setLoading(false));
+            return resp;
+          }
         });
       })
       .finally(() => {
@@ -82,9 +83,9 @@ export function productEdit(data) {
         }
         dispatch(productsFetch()).then((resp) => {
           if (resp?.error) {
-          dispatch(setLoading(false));
-          return resp;
-        }
+            dispatch(setLoading(false));
+            return resp;
+          }
         });
       })
       .finally(() => {
@@ -106,9 +107,9 @@ export function productDelete(id) {
         }
         dispatch(productsFetch()).then((resp) => {
           if (resp?.error) {
-          dispatch(setLoading(false));
-          return resp;
-        }
+            dispatch(setLoading(false));
+            return resp;
+          }
         });
       })
       .finally(() => {

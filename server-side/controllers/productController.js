@@ -1,22 +1,6 @@
 const { Product, Image, User, Category, sequelize } = require("../models");
 
 class productController {
-  static async test(req, res, next) {
-    try {
-      const Products = await Product.findAll({
-        attributes: { exclude: ['id', 'createdAt', 'updatedAt']}
-      });
-      const Categories = await Category.findAll({
-        attributes: { exclude: ['id', 'createdAt', 'updatedAt']}
-      });
-      const Users = await User.findAll({
-        attributes: { exclude: ['id', 'password', 'createdAt', 'updatedAt']}
-      });
-      res.status(200).json(products);
-    } catch (error) {
-      next(error);
-    }
-  }
   static async fetchProducts(req, res, next) {
     try {
       const products = await Product.findAll({
@@ -59,10 +43,11 @@ class productController {
     try {
       const { name, description, price, mainImg, image1, image2, categoryId } =
         req.body;
+      if (!image1) throw { code: 400, msg: "Image 1 is required" };
+      if (!image2) throw { code: 400, msg: "Image 2 is required" };
+      if (!categoryId) throw { code: 400, msg: "Category is required" };
       const findCategory = await Category.findByPk(categoryId);
-      if (!findCategory) {
-        throw { code: 404, msg: "Category not found" };
-      }
+      if (!findCategory) throw { code: 404, msg: "Category not found" };
 
       const product = await Product.create(
         {
@@ -105,16 +90,23 @@ class productController {
         price,
         mainImg,
         image1,
-        imageId1,
         image2,
-        imageId2,
         categoryId,
       } = req.body;
       const { id } = req.params;
+
+      if (!image1) throw { code: 400, msg: "Image 1 is required" };
+      if (!image2) throw { code: 400, msg: "Image 2 is required" };
+      if (!categoryId) throw { code: 400, msg: "Category is required" };
+
       const findCategory = await Category.findByPk(categoryId);
-      if (!findCategory) {
-        throw { code: 404, msg: "Category not found" };
-      }
+      if (!findCategory) throw { code: 404, msg: "Category not found" };
+
+      const findProduct = await Product.findByOne({
+        include: { model: Image },
+        where: { id }
+      });
+      if (!findProduct) throw { code: 404, msg: "Product not found" };
 
       const product = await Product.update(
         {
@@ -129,12 +121,12 @@ class productController {
       await Image.bulkCreate(
         [
           {
-            id: imageId1,
+            id: findProduct.Images[0].id,
             productId: product.id,
             imgUrl: image1,
           },
           {
-            id: imageId2,
+            id: findProduct.Images[1].id,
             productId: product.id,
             imgUrl: image2,
           },

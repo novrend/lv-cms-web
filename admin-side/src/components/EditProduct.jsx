@@ -14,8 +14,6 @@ export default function EditProduct(props) {
         categoryId: props.product.categoryId,
         image1: props?.product?.Images?.[0]?.imgUrl,
         image2: props?.product?.Images?.[1]?.imgUrl,
-        imageId1: props?.product?.Images?.[0]?.id,
-        imageId2: props?.product?.Images?.[1]?.id
     })
 
 
@@ -36,7 +34,7 @@ export default function EditProduct(props) {
     }
     return (
         <section>
-            <div className="fixed left-0 right-0 z-50 items-center justify-center overflow-x-hidden overflow-y-auto top-4 md:inset-0 h-modal sm:h-full flex"
+            <div className="fixed left-0 right-0 z-30 items-center justify-center overflow-x-hidden overflow-y-auto top-4 md:inset-0 h-modal sm:h-full flex"
                 id="product-modal">
                 <div className="relative w-full h-full max-w-2xl px-4 md:h-auto">
                     <form onSubmit={editHandler}>
