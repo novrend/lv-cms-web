@@ -12,6 +12,7 @@ module.exports = {
      * }], {});
      */
     data.Categories.forEach((el) => {
+      delete el.id;
       el.createdAt = el.updatedAt = new Date();
     });
     await queryInterface.bulkInsert("Categories", data.Categories, {});
